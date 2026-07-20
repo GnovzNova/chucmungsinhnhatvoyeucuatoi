@@ -18,7 +18,34 @@
             overflow-x: hidden;
             text-align: center;
         }
-        .container { max-width: 600px; padding: 20px; z-index: 10; }
+        
+        /* Hiệu ứng chữ chạy ngang màn hình */
+        .marquee-box {
+            position: fixed;
+            top: 20px;
+            width: 100%;
+            background: rgba(255, 117, 140, 0.2);
+            padding: 10px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        .marquee-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffbcca;
+            text-shadow: 0 0 5px rgba(255,117,140,0.5);
+        }
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
+        .container { max-width: 600px; padding: 20px; z-index: 10; margin-top: 60px; }
         h1 { font-size: 2.5rem; color: #ff758c; margin-bottom: 10px; text-shadow: 0 0 10px rgba(255,117,140,0.5); }
         .sub-title { font-style: italic; color: #ffbcca; margin-bottom: 30px; }
         
@@ -47,42 +74,49 @@
         @keyframes fall {
             to { transform: translateY(105vh) rotate(360deg); }
         }
-        .btn-music {
-            margin-top: 20px; padding: 10px 20px; border: none; background: #ff758c;
-            color: white; border-radius: 20px; cursor: pointer; font-weight: bold;
-        }
     </style>
 </head>
 <body>
+
+    <!-- Dòng chữ chạy ngang màn hình ở đây -->
+    <div class="marquee-box">
+        <div class="marquee-content">🎉 Happy Birthday My Love! Chúc cục nợ của em tuổi mới luôn vui vẻ, đáng yêu và bớt bắt nạt em lại nhaaa! ❤️ ✨ 🎂 🥳 💖</div>
+    </div>
 
     <div class="container">
         <h1>Chúc Mừng Sinh Nhật Vợ Yêu! 🎂</h1>
         <p class="sub-title">Chúc Vợ Yêu Sinh Nhật Vui Vẻ Ạaaa</p>
 
         <div class="card" id="loveCard">
-            <h3 id="clickMe">🎁 Bấm vào đây để mở quà nèee!</h3>
+            <h3 id="clickMe">🎁 Bấm vào đây để mở quà và bật nhạc nèee!</h3>
             <div class="hidden-content" id="letter">
-                <!-- MÀY TỰ THAY VĂN CỦA MÀY VÀO ĐÂY NHA -->
                 <p>Hello cục nợ của em, chúc mừng sinh nhật tuổi mới nhé! 🎉</p>
                 <p>Tuy giờ nghèo rớt mồng tơi, ăn sáng còn không có nhưng tình cảm dành cho chị là vô giá đấy nhớ chưa. Cảm ơn chị vì đã luôn ở bên một thằng hay làm mấy trò khùng điên này. Đợi em hết nghèo dắt em đi ăn sập tiệm sau nha!</p>
                 <p>Yêu chị nhiều lắm! ❤️</p>
             </div>
         </div>
 
-        <!-- Chèn tạm cái widget nhạc Lofi từ Youtube, nó hiện cái trình phát nhỏ bên dưới -->
-        <iframe width="0" height="0" id="audioTrack" src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1" frameborder="0" allow="autoplay"></iframe>
-        <button class="btn-music" onclick="playMusic()">🎵 Bật/Tắt Nhạc</button>
+        <!-- Nhạc nền test trực tiếp dạng mp3 ẩn ngầm -->
+        <audio id="bgMusic" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
     </div>
 
     <script>
-        // Mở thư
         const card = document.getElementById('loveCard');
         const letter = document.getElementById('letter');
         const clickMe = document.getElementById('clickMe');
+        const music = document.getElementById('bgMusic');
         
+        // Khi bấm vào hộp quà: Vừa mở thư vừa tự động phát nhạc luôn
         card.addEventListener('click', () => {
             letter.style.display = 'block';
             clickMe.style.display = 'none';
+            
+            // Phát nhạc
+            music.play().catch(error => {
+                console.log("Trình duyệt chặn phát nhạc tự động: ", error);
+            });
         });
 
         // Tạo tim bay
@@ -97,13 +131,6 @@
             setTimeout(() => { heart.remove(); }, 5000);
         }
         setInterval(createHeart, 300);
-
-        // Hàm điều khiển nhạc (vì trình duyệt chặn tự động phát nên phải bấm)
-        function playMusic() {
-            let iframe = document.getElementById('audioTrack');
-            // Đổi link có gỡ mute để phát ra tiếng
-            iframe.src = "https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1";
-        }
     </script>
 </body>
 </html>

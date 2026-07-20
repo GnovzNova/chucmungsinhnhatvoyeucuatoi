@@ -7,130 +7,223 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-            color: #fff;
+            background-color: #ffd8be;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
-            text-align: center;
-        }
-        
-        /* Hiệu ứng chữ chạy ngang màn hình */
-        .marquee-box {
-            position: fixed;
-            top: 20px;
-            width: 100%;
-            background: rgba(255, 117, 140, 0.2);
-            padding: 10px 0;
-            white-space: nowrap;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 100;
-        }
-        .marquee-content {
-            display: inline-block;
-            padding-left: 100%;
-            animation: marquee 15s linear infinite;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #ffbcca;
-            text-shadow: 0 0 5px rgba(255,117,140,0.5);
-        }
-        @keyframes marquee {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
         }
 
-        .container { max-width: 600px; padding: 20px; z-index: 10; margin-top: 60px; }
-        h1 { font-size: 2.5rem; color: #ff758c; margin-bottom: 10px; text-shadow: 0 0 10px rgba(255,117,140,0.5); }
-        .sub-title { font-style: italic; color: #ffbcca; margin-bottom: 30px; }
+        /* Hệ thống màn hình */
+        .screen { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100vh; }
+        .active { display: flex; }
         
-        /* Hộp quà/Thư */
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        /* Màn hình 1: Đăng nhập giống hệt video */
+        .login-card {
+            background: white;
+            padding: 25px;
+            border: 4px solid #ff4d6d;
+            border-radius: 10px;
+            text-align: center;
+            width: 320px;
+            box-shadow: 6px 6px 0px #ff4d6d;
+        }
+        .login-card img { width: 160px; margin-bottom: 20px; border-radius: 5px; }
+        .login-card input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1rem;
+            outline: none;
+        }
+        .login-card input:focus { border-color: #ff4d6d; }
+        
+        /* Nút bấm tổng hợp chuẩn style cute */
+        .btn {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 5px;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            box-shadow: 0 5px #c92a42;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.1s ease;
         }
-        .card:hover { transform: scale(1.03); }
-        .hidden-content { display: none; margin-top: 20px; line-height: 1.6; font-size: 1.1rem; color: #ffe3e8; }
-        
-        /* Hiệu ứng tim rơi */
-        .heart {
-            position: absolute;
-            color: rgba(255, 117, 140, 0.6);
-            font-size: 20px;
-            animation: fall linear forwards;
-            z-index: 1;
+        .btn:active { box-shadow: 0 0 #c92a42; transform: translateY(5px); }
+
+        /* Màn hình 2: Bánh Kem lấp lánh */
+        .cake-text {
+            font-size: 2.2rem;
+            color: #ff4d6d;
+            font-weight: 900;
+            letter-spacing: 4px;
+            line-height: 1.5;
+            margin-bottom: 35px;
+            text-transform: uppercase;
+            text-align: center;
         }
-        @keyframes fall {
-            to { transform: translateY(105vh) rotate(360deg); }
+        .cake-container { position: relative; width: 200px; height: 200px; margin-bottom: 50px; }
+        .cake {
+            position: absolute; bottom: 0; width: 200px; height: 100px;
+            background: #ff758c; border-radius: 60px / 30px;
+            box-shadow: 0 10px #ff4d6d, inset 0 5px rgba(255,255,255,0.4);
+        }
+        .cake:before {
+            content: ""; position: absolute; top: -15px; width: 200px; height: 50px;
+            background: #fff; border-radius: 60px / 25px;
+            box-shadow: inset 0 -5px #eee, 0 5px #ff758c;
+        }
+        .candle {
+            position: absolute; bottom: 90px; left: 93px; width: 14px; height: 50px;
+            background: linear-gradient(#ffcd3c, #ff9f43); border-radius: 3px;
+        }
+        .flame {
+            position: absolute; top: -18px; left: -1px; width: 16px; height: 22px;
+            background: #ff4d6d; border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 10px #ff4d6d, 0 0 20px #ffcd3c;
+            animation: flicker 0.1s ease-in-out infinite alternate;
+        }
+        @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+
+        /* Màn hình 3: Thư tín đóng mở bao nghệ */
+        .envelope-wrapper {
+            position: relative; width: 340px; height: 240px;
+            background-color: #ff758c; border-radius: 0 0 10px 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            cursor: pointer; margin-bottom: 60px;
+        }
+        .envelope-wrapper:before {
+            content: ""; position: absolute; top: -115px; left: 0;
+            border-left: 170px solid transparent; border-right: 170px solid transparent;
+            border-bottom: 115px solid #ff758c; transform-origin: bottom;
+            transition: transform 0.5s ease; z-index: 4;
+        }
+        .envelope-wrapper.open:before { transform: rotateX(180deg); z-index: 1; }
+        .envelope-wrapper:after {
+            content: ""; position: absolute; top: 0; left: 0;
+            border-left: 170px solid #ff4d6d; border-right: 170px solid #ff4d6d;
+            border-bottom: 120px solid transparent; border-top: 120px solid transparent;
+            z-index: 3; border-radius: 0 0 10px 10px;
+        }
+        .letter-card {
+            position: absolute; top: 10px; left: 15px; width: 310px; height: 220px;
+            background: white; border-radius: 5px; padding: 20px;
+            transition: transform 0.5s ease; z-index: 2; overflow-y: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); font-size: 0.95rem; color: #444; line-height: 1.6;
+        }
+        .envelope-wrapper.open .letter-card { transform: translateY(-130px); z-index: 5; height: 280px; }
+        .letter-card h2 { color: #ff4d6d; font-size: 1.15rem; text-align: center; margin-bottom: 12px; }
+
+        /* Pháo hoa giấy rơi */
+        .confetti {
+            position: absolute; width: 10px; height: 10px;
+            animation: drop 2.5s ease-out infinite; z-index: 99;
+        }
+        @keyframes drop {
+            0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Dòng chữ chạy ngang màn hình ở đây -->
-    <div class="marquee-box">
-        <div class="marquee-content">🎉 Happy Birthday My Love! Chúc cục nợ của em tuổi mới luôn vui vẻ, đáng yêu và bớt bắt nạt em lại nhaaa! ❤️ ✨ 🎂 🥳 💖</div>
+    <!-- Screen 1: Login -->
+    <div class="screen active" id="screenLogin">
+        <div class="login-card">
+            <img src="https://media.tenor.com/J77S7Iby844AAAAi/milk-and-mocha-bear.gif" alt="Cute Bear">
+            <input type="password" id="passwordInput" placeholder="Password">
+            <button class="btn" style="width: 100%;" onclick="checkPassword()">ENTER</button>
+        </div>
     </div>
 
-    <div class="container">
-        <h1>Chúc Mừng Sinh Nhật Vợ Yêu! 🎂</h1>
-        <p class="sub-title">Chúc Vợ Yêu Sinh Nhật Vui Vẻ Ạaaa</p>
+    <!-- Screen 2: Bánh kem -->
+    <div class="screen" id="screenCake">
+        <div class="cake-text">HAPPY<br>BIRTHDAY<br>VỢ YÊU</div>
+        <div class="cake-container">
+            <div class="candle"><div class="flame"></div></div>
+            <div class="cake"></div>
+        </div>
+        <button class="btn" onclick="nextScreen()">NEXT</button>
+    </div>
 
-        <div class="card" id="loveCard">
-            <h3 id="clickMe">🎁 Bấm vào đây để mở quà và bật nhạc nèee!</h3>
-            <div class="hidden-content" id="letter">
-                <p>Hello cục nợ của em, chúc mừng sinh nhật tuổi mới nhé! 🎉</p>
-                <p>Tuy giờ nghèo rớt mồng tơi, ăn sáng còn không có nhưng tình cảm dành cho chị là vô giá đấy nhớ chưa. Cảm ơn chị vì đã luôn ở bên một thằng hay làm mấy trò khùng điên này. Đợi em hết nghèo dắt em đi ăn sập tiệm sau nha!</p>
-                <p>Yêu chị nhiều lắm! ❤️</p>
+    <!-- Screen 3: Thư điện tử -->
+    <div class="screen" id="screenLetter">
+        <div class="envelope-wrapper" id="envelope" onclick="toggleEnvelope()">
+            <div class="letter-card">
+                <h2>GỬI EM YÊU CỦA ANH! ❤️</h2>
+                <p>Hello cục nợ của em, chúc mừng sinh nhật tuổi mới nhé! 🎉</p><br>
+                <p>Tuy giờ nghèo rớt mồng tơi, ăn sáng còn không có nhưng tình cảm dành cho chị là vô giá đấy nhớ chưa. Cảm ơn chị vì đã luôn ở bên một thằng hay làm mấy trò khùng điên này. Đợi em hết nghèo dắt em đi ăn sập tiệm sau nha!</p><br>
+                <p style="text-align: right; font-weight: bold; color: #ff4d6d;">From TIENDEV with love 💖</p>
             </div>
         </div>
-
-        <!-- Nhạc nền test trực tiếp dạng mp3 ẩn ngầm -->
-        <audio id="bgMusic" loop>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        </audio>
+        <button class="btn" style="background: #888; box-shadow: 0 5px #554;" onclick="prevScreen()">BACK</button>
     </div>
 
-    <script>
-        const card = document.getElementById('loveCard');
-        const letter = document.getElementById('letter');
-        const clickMe = document.getElementById('clickMe');
-        const music = document.getElementById('bgMusic');
-        
-        // Khi bấm vào hộp quà: Vừa mở thư vừa tự động phát nhạc luôn
-        card.addEventListener('click', () => {
-            letter.style.display = 'block';
-            clickMe.style.display = 'none';
-            
-            // Phát nhạc
-            music.play().catch(error => {
-                console.log("Trình duyệt chặn phát nhạc tự động: ", error);
-            });
-        });
+    <!-- Link nhạc lofi trực tiếp dạng mp3 ẩn ngầm để test -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
 
-        // Tạo tim bay
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-            heart.style.top = '-5vh';
-            document.body.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, 5000);
+    <script>
+        const music = document.getElementById('bgMusic');
+
+        // Nhập mật khẩu bừa bất kỳ rồi bấm ENTER là qua màn
+        function checkPassword() {
+            const pass = document.getElementById('passwordInput').value;
+            if(pass.trim() !== "") {
+                document.getElementById('screenLogin').classList.remove('active');
+                document.getElementById('screenCake').classList.add('active');
+                
+                // Nhạc tự động lên luôn khi bồ m tương tác bấm ENTER
+                music.play().catch(e => console.log("Trình duyệt chặn:", e));
+                
+                // Kích hoạt pháo hoa giấy rơi tung tóe lãng mạn
+                setInterval(createConfetti, 120);
+            } else {
+                alert("Ơ kìa nhập mật khẩu đi chứ bồ ơi! 🤨");
+            }
         }
-        setInterval(createHeart, 300);
+
+        function nextScreen() {
+            document.getElementById('screenCake').classList.remove('active');
+            document.getElementById('screenLetter').classList.add('active');
+        }
+
+        function prevScreen() {
+            document.getElementById('screenLetter').classList.remove('active');
+            document.getElementById('screenCake').classList.add('active');
+        }
+
+        // Bấm vào phong bì để mở/đóng thư
+        function toggleEnvelope() {
+            document.getElementById('envelope').classList.toggle('open');
+        }
+
+        // Hàm tạo hiệu ứng pháo hoa giấy rơi
+        function createConfetti() {
+            const colors = ['#ff4d6d', '#ff758c', '#ffbcca', '#fff', '#ffcd3c'];
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDuration = Math.random() * 2 + 1.5 + 's';
+            confetti.style.opacity = Math.random();
+            // Kích thước ngẫu nhiên cho tự nhiên
+            const size = Math.random() * 8 + 6 + 'px';
+            confetti.style.width = size;
+            confetti.style.height = size;
+            document.body.appendChild(confetti);
+            setTimeout(() => { confetti.remove(); }, 3500);
+        }
     </script>
 </body>
 </html>

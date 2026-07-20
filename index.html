@@ -20,7 +20,7 @@
         .screen { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100vh; }
         .active { display: flex; }
         
-        /* Màn hình 1: Đăng nhập giống hệt video */
+        /* Màn hình 1: Đăng nhập */
         .login-card {
             background: white;
             padding: 25px;
@@ -30,27 +30,28 @@
             width: 320px;
             box-shadow: 6px 6px 0px #ff4d6d;
         }
-        .login-card img { width: 160px; margin-bottom: 20px; border-radius: 5px; }
+        .login-card img { width: 220px; height: auto; margin-bottom: 20px; border-radius: 5px; }
         .login-card input {
             width: 100%;
             padding: 12px;
             margin-bottom: 15px;
-            border: 2px solid #ccc;
+            border: 2px solid #ff4d6d;
             border-radius: 5px;
             text-align: center;
             font-size: 1rem;
+            color: #ff4d6d;
             outline: none;
         }
-        .login-card input:focus { border-color: #ff4d6d; }
+        .login-card input::placeholder { color: #ffbcca; }
         
-        /* Nút bấm tổng hợp chuẩn style cute */
+        /* Nút bấm tổng thể */
         .btn {
             background-color: #ff4d6d;
             color: white;
             border: none;
             padding: 12px 30px;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.4rem;
             border-radius: 5px;
             cursor: pointer;
             box-shadow: 0 5px #c92a42;
@@ -60,7 +61,7 @@
         }
         .btn:active { box-shadow: 0 0 #c92a42; transform: translateY(5px); }
 
-        /* Màn hình 2: Bánh Kem lấp lánh */
+        /* Màn hình 2: Bánh Kem */
         .cake-text {
             font-size: 2.2rem;
             color: #ff4d6d;
@@ -94,34 +95,49 @@
         }
         @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 
-        /* Màn hình 3: Thư tín đóng mở bao nghệ */
+        /* Màn hình 3: Hệ thống phong bì to, đầy đặn chuẩn video */
         .envelope-wrapper {
-            position: relative; width: 340px; height: 240px;
-            background-color: #ff758c; border-radius: 0 0 10px 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            cursor: pointer; margin-bottom: 60px;
+            position: relative; 
+            width: 480px; /* Tăng chiều rộng bao thư */
+            height: 320px; /* Tăng chiều cao bao thư */
+            background-color: #ff758c; 
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            cursor: pointer; 
+            margin-bottom: 40px;
         }
+        /* Nắp phong bì mở lên trên */
         .envelope-wrapper:before {
-            content: ""; position: absolute; top: -115px; left: 0;
-            border-left: 170px solid transparent; border-right: 170px solid transparent;
-            border-bottom: 115px solid #ff758c; transform-origin: bottom;
+            content: ""; position: absolute; top: -160px; left: 0;
+            border-left: 240px solid transparent; border-right: 240px solid transparent;
+            border-bottom: 160px solid #ff758c; transform-origin: bottom;
             transition: transform 0.5s ease; z-index: 4;
         }
         .envelope-wrapper.open:before { transform: rotateX(180deg); z-index: 1; }
+        
+        /* Thân phong bì đè hai bên */
         .envelope-wrapper:after {
             content: ""; position: absolute; top: 0; left: 0;
-            border-left: 170px solid #ff4d6d; border-right: 170px solid #ff4d6d;
-            border-bottom: 120px solid transparent; border-top: 120px solid transparent;
+            border-left: 240px solid #ff4d6d; border-right: 240px solid #ff4d6d;
+            border-bottom: 160px solid transparent; border-top: 160px solid transparent;
             z-index: 3; border-radius: 0 0 10px 10px;
         }
+        
+        /* Tờ thư bên trong trồi lên đầy đặn */
         .letter-card {
-            position: absolute; top: 10px; left: 15px; width: 310px; height: 220px;
-            background: white; border-radius: 5px; padding: 20px;
+            position: absolute; top: 15px; left: 20px; 
+            width: 440px; height: 290px;
+            background: white; border-radius: 5px; padding: 25px;
             transition: transform 0.5s ease; z-index: 2; overflow-y: auto;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1); font-size: 0.95rem; color: #444; line-height: 1.6;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1); font-size: 1.05rem; color: #444; line-height: 1.7;
         }
-        .envelope-wrapper.open .letter-card { transform: translateY(-130px); z-index: 5; height: 280px; }
-        .letter-card h2 { color: #ff4d6d; font-size: 1.15rem; text-align: center; margin-bottom: 12px; }
+        /* Khi mở thư, đẩy tờ thư lên cao hơn để lộ nội dung đầy đặn */
+        .envelope-wrapper.open .letter-card { 
+            transform: translateY(-180px); 
+            z-index: 5; 
+            height: 380px; /* Chiều cao thư khi mở bung ra */
+        }
+        .letter-card h2 { color: #ff4d6d; font-size: 1.4rem; text-align: center; margin-bottom: 15px; }
 
         /* Pháo hoa giấy rơi */
         .confetti {
@@ -139,7 +155,8 @@
     <!-- Screen 1: Login -->
     <div class="screen active" id="screenLogin">
         <div class="login-card">
-            <img src="https://media.tenor.com/J77S7Iby844AAAAi/milk-and-mocha-bear.gif" alt="Cute Bear">
+            <!-- Thay bằng ảnh gấu nâu ôm hoa của mày -->
+            <img src="gau_om_hoa.png" alt="Cute Bear With Flowers">
             <input type="password" id="passwordInput" placeholder="Password">
             <button class="btn" style="width: 100%;" onclick="checkPassword()">ENTER</button>
         </div>
@@ -155,20 +172,20 @@
         <button class="btn" onclick="nextScreen()">NEXT</button>
     </div>
 
-    <!-- Screen 3: Thư điện tử -->
+    <!-- Screen 3: Thư điện tử đầy đặn -->
     <div class="screen" id="screenLetter">
         <div class="envelope-wrapper" id="envelope" onclick="toggleEnvelope()">
             <div class="letter-card">
                 <h2>GỬI EM YÊU CỦA ANH! ❤️</h2>
                 <p>Hello cục nợ của em, chúc mừng sinh nhật tuổi mới nhé! 🎉</p><br>
                 <p>Tuy giờ nghèo rớt mồng tơi, ăn sáng còn không có nhưng tình cảm dành cho chị là vô giá đấy nhớ chưa. Cảm ơn chị vì đã luôn ở bên một thằng hay làm mấy trò khùng điên này. Đợi em hết nghèo dắt em đi ăn sập tiệm sau nha!</p><br>
-                <p style="text-align: right; font-weight: bold; color: #ff4d6d;">From TIENDEV with love 💖</p>
+                <p style="text-align: right; font-weight: bold; color: #ff4d6d; font-style: italic;">From the people who love you so much 💖</p>
             </div>
         </div>
-        <button class="btn" style="background: #888; box-shadow: 0 5px #554;" onclick="prevScreen()">BACK</button>
+        <button class="btn" style="background: #888; box-shadow: 0 5px #554; font-size: 1.1rem;" onclick="prevScreen()">BACK</button>
     </div>
 
-    <!-- Link nhạc lofi trực tiếp dạng mp3 ẩn ngầm để test -->
+    <!-- Link nhạc lofi test -->
     <audio id="bgMusic" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
@@ -176,20 +193,16 @@
     <script>
         const music = document.getElementById('bgMusic');
 
-        // Nhập mật khẩu bừa bất kỳ rồi bấm ENTER là qua màn
         function checkPassword() {
             const pass = document.getElementById('passwordInput').value;
-            if(pass.trim() !== "") {
+            if(pass.trim() === "24072011") {
                 document.getElementById('screenLogin').classList.remove('active');
                 document.getElementById('screenCake').classList.add('active');
                 
-                // Nhạc tự động lên luôn khi bồ m tương tác bấm ENTER
                 music.play().catch(e => console.log("Trình duyệt chặn:", e));
-                
-                // Kích hoạt pháo hoa giấy rơi tung tóe lãng mạn
                 setInterval(createConfetti, 120);
             } else {
-                alert("Ơ kìa nhập mật khẩu đi chứ bồ ơi! 🤨");
+                alert("Sai mật khẩu rồi kìa cục nợ ơi! 🤨❌");
             }
         }
 
@@ -203,12 +216,10 @@
             document.getElementById('screenCake').classList.add('active');
         }
 
-        // Bấm vào phong bì để mở/đóng thư
         function toggleEnvelope() {
             document.getElementById('envelope').classList.toggle('open');
         }
 
-        // Hàm tạo hiệu ứng pháo hoa giấy rơi
         function createConfetti() {
             const colors = ['#ff4d6d', '#ff758c', '#ffbcca', '#fff', '#ffcd3c'];
             const confetti = document.createElement('div');
@@ -217,7 +228,6 @@
             confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
             confetti.style.animationDuration = Math.random() * 2 + 1.5 + 's';
             confetti.style.opacity = Math.random();
-            // Kích thước ngẫu nhiên cho tự nhiên
             const size = Math.random() * 8 + 6 + 'px';
             confetti.style.width = size;
             confetti.style.height = size;

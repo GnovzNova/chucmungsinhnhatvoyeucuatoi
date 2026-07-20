@@ -7,22 +7,41 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background-color: #ffd8be;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
+            position: relative;
+        }
+
+        /* Hiệu ứng bầu trời sao */
+        .stars {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
         }
 
         /* Hệ thống màn hình */
-        .screen { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100vh; }
+        .screen { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100vh; position: relative; z-index: 1; }
         .active { display: flex; }
         
         /* Màn hình 1: Đăng nhập */
         .login-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 25px;
             border: 4px solid #ff4d6d;
             border-radius: 10px;
@@ -64,13 +83,14 @@
         /* Màn hình 2: Bánh Kem */
         .cake-text {
             font-size: 2.2rem;
-            color: #ff4d6d;
+            color: #fff;
             font-weight: 900;
             letter-spacing: 4px;
             line-height: 1.5;
             margin-bottom: 35px;
             text-transform: uppercase;
             text-align: center;
+            text-shadow: 0 0 10px #ff4d6d, 0 0 20px #ff4d6d;
         }
         .cake-container { position: relative; width: 200px; height: 200px; margin-bottom: 50px; }
         .cake {
@@ -95,14 +115,14 @@
         }
         @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 
-        /* Màn hình 3: Đã kéo thấp hẳn xuống */
+        /* Màn hình 3: Thư trên nền trời sao */
         .envelope-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
             flex-grow: 1;
-            padding-top: 160px; /* Đẩy hẳn cụm bao thư xuống dưới */
+            padding-top: 150px;
         }
 
         .envelope-wrapper {
@@ -111,9 +131,8 @@
             height: 320px; 
             background-color: #ff758c; 
             border-radius: 0 0 10px 10px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-            cursor: pointer; 
-            margin-bottom: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            margin-bottom: 25px;
         }
 
         /* Nắp phong bì */
@@ -124,6 +143,7 @@
             transform-origin: top;
             transition: transform 0.4s ease-in-out; 
             z-index: 5;
+            cursor: pointer;
         }
         .envelope-wrapper.open:before { 
             transform: rotateX(180deg); 
@@ -137,9 +157,10 @@
             border-left: 240px solid #ff5573; border-right: 240px solid #ff5573;
             border-bottom: 160px solid #ff4d6d; border-top: 160px solid transparent;
             z-index: 4; border-radius: 0 0 10px 10px;
+            pointer-events: none;
         }
         
-        /* Tờ thư giấu bên trong */
+        /* Tờ thư */
         .letter-card {
             position: absolute; 
             bottom: 10px; 
@@ -148,36 +169,82 @@
             height: 290px;
             background: white; 
             border-radius: 5px; 
-            padding: 25px; 
+            padding: 25px 25px 20px 25px; 
             transition: transform 0.5s ease-in-out, z-index 0.5s; 
             z-index: 2;
-            overflow: hidden;
+            overflow-y: auto;
             box-shadow: 0 0 15px rgba(0,0,0,0.1); 
             font-size: 1rem; 
             color: #444; 
             line-height: 1.5;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Khi mở thư: trượt lên vừa đủ tầm nhìn xinh xắn */
+        /* Ẩn thanh cuộn để nhìn cho đẹp */
+        .letter-card::-webkit-scrollbar { width: 0px; background: transparent; }
+
         .envelope-wrapper.open .letter-card { 
-            transform: translateY(-90px); 
+            transform: translateY(-150px); 
             z-index: 6; 
-            height: 350px;
+            height: 420px;
         }
-        .letter-card h2 { color: #ff4d6d; font-size: 1.3rem; text-align: center; margin-bottom: 12px; }
+        .letter-card h2 { color: #ff4d6d; font-size: 1.25rem; text-align: center; margin-bottom: 12px; }
+        .letter-text { margin-bottom: 15px; }
+        .letter-text p { margin-bottom: 8px; text-indent: 10px; text-align: justify; }
 
-        /* Pháo hoa giấy */
-        .confetti {
-            position: absolute; width: 10px; height: 10px;
-            animation: drop 2.5s ease-out infinite; z-index: 99;
+        /* Nút bấm bí mật cuối trang thư */
+        .secret-question-btn {
+            background: none;
+            border: none;
+            color: #ff4d6d;
+            font-size: 0.95rem;
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: auto;
+            padding: 10px 0;
+            text-align: center;
+            outline: none;
+            transition: color 0.2s;
         }
-        @keyframes drop {
-            0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        .secret-question-btn:hover { color: #c92a42; }
+
+        /* Vùng chứa văn bản Typewriter */
+        .secret-typewriter-space {
+            display: none;
+            color: #ff4d6d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-top: 10px;
+            border-top: 1px dashed #ffbcca;
+            padding-top: 10px;
         }
+        .typewriter-line {
+            margin-bottom: 10px;
+            min-height: 20px;
+        }
+        
+        /* Hiệu ứng con trỏ nhấp nháy */
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 15px;
+            background-color: #ff4d6d;
+            margin-left: 2px;
+            animation: blink 0.6s infinite;
+            vertical-align: middle;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Cụm nút điều khiển hàng dưới */
+        .controls { display: flex; gap: 15px; }
     </style>
 </head>
 <body>
+
+    <!-- Background bầu trời sao lấp lánh -->
+    <div class="stars" id="starsContainer"></div>
 
     <!-- Screen 1: Login -->
     <div class="screen active" id="screenLogin">
@@ -190,7 +257,7 @@
 
     <!-- Screen 2: Bánh kem -->
     <div class="screen" id="screenCake">
-        <div class="cake-text">HAPPY<br>BIRTHDAY<br>VỢ YÊU</div>
+        <div class="cake-text">HAPPY<br>BIRTHDAY<br>CHỊ YÊU</div>
         <div class="cake-container">
             <div class="candle"><div class="flame"></div></div>
             <div class="cake"></div>
@@ -198,18 +265,33 @@
         <button class="btn" onclick="nextScreen()">NEXT</button>
     </div>
 
-    <!-- Screen 3: Thư điện tử chuẩn tầm mắt -->
+    <!-- Screen 3: Thư điện tử nền trời sao -->
     <div class="screen" id="screenLetter">
         <div class="envelope-container">
-            <div class="envelope-wrapper" id="envelope" onclick="toggleEnvelope()">
-                <div class="letter-card">
-                    <h2>GỬI EM YÊU CỦA ANH! ❤️</h2>
-                    <p>Hello cục nợ của em, chúc mừng sinh nhật tuổi mới nhé! 🎉</p><br>
-                    <p>Tuy giờ nghèo rớt mồng tơi, ăn sáng còn không có nhưng tình cảm dành cho chị là vô giá đấy nhớ chưa. Cảm ơn chị vì đã luôn ở bên một thằng hay làm mấy trò khùng điên này. Đợi em hết nghèo dắt em đi ăn sập tiệm sau nha!</p><br>
-                    <p style="text-align: right; font-weight: bold; color: #ff4d6d; font-style: italic; margin-top: 10px;">From the people who love you so much 💖</p>
+            <div class="envelope-wrapper" id="envelope">
+                <div class="letter-card" id="letterCard">
+                    <h2>Happy Birthday, cô gái của emmm ❤️</h2>
+                    <div class="letter-text">
+                        <p>Chúc chị yêu của em tuổi mới luôn khỏe mạnh, luôn cười thật nhiều và gặp thật nhiều may mắn.</p>
+                        <p>Mong tuổi mới sẽ mang đến cho chị thật nhiều điều tốt đẹp, ít áp lực hơn, nhiều tiếng cười hơn và luôn có những người yêu thương chị ở bên.</p>
+                        <p style="text-align: right; font-weight: bold; margin-top: 10px;">Yêu chị. ❤️</p>
+                    </div>
+                    
+                    <!-- Nút bấm bí mật -->
+                    <button class="secret-question-btn" id="secretBtn" onclick="revealSecret(event)">Chị biết điều gì không?</button>
+                    
+                    <!-- Vùng typewriter ẩn hiện từng dòng -->
+                    <div class="secret-typewriter-space" id="typewriterSpace">
+                        <div class="typewriter-line" id="line1" style="font-weight: bold; text-align: center; margin-bottom: 12px;"></div>
+                        <div class="typewriter-line" id="line2" style="text-indent: 10px; text-align: justify;"></div>
+                        <div class="typewriter-line" id="line3" style="text-indent: 10px; text-align: justify;"></div>
+                        <div class="typewriter-line" id="line4" style="text-align: right; font-weight: bold; margin-top: 5px;"></div>
+                    </div>
                 </div>
             </div>
-            <button class="btn" style="background: #888; box-shadow: 0 5px #554; font-size: 1.1rem;" onclick="prevScreen()">BACK</button>
+            <div class="controls">
+                <button class="btn" style="background: #888; box-shadow: 0 5px #554; font-size: 1.1rem;" onclick="prevScreen()">BACK</button>
+            </div>
         </div>
     </div>
 
@@ -219,8 +301,26 @@
 
     <script>
         const music = document.getElementById('bgMusic');
+        let typingTimeout = null; // Để clear nếu user bấm BACK giữa chừng
 
-        // Mật khẩu dựa theo ngày kỷ niệm/sinh nhật cũ
+        // Tạo bầu trời sao ngẫu nhiên
+        function generateStars() {
+            const container = document.getElementById('starsContainer');
+            const starCount = 120;
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                const size = Math.random() * 3 + 1 + 'px';
+                star.style.width = size;
+                star.style.height = size;
+                star.style.setProperty('--duration', Math.random() * 1.5 + 0.5 + 's');
+                container.appendChild(star);
+            }
+        }
+        generateStars();
+
         function checkPassword() {
             const pass = document.getElementById('passwordInput').value;
             if(pass.trim() === "24072011") {
@@ -230,7 +330,7 @@
                 music.play().catch(e => console.log("Trình duyệt chặn:", e));
                 setInterval(createConfetti, 120);
             } else {
-                alert("Sai mật khẩu rồi kìa cục nợ ơi! 🤨❌");
+                alert("🤔 Hình như chị quên mất một ngày rất quan trọng rồi...");
             }
         }
 
@@ -242,15 +342,84 @@
         function prevScreen() {
             document.getElementById('screenLetter').classList.remove('active');
             document.getElementById('screenCake').classList.add('active');
+            
+            // Reset trạng thái bao thư và dừng cụm hiệu ứng chạy chữ
+            document.getElementById('envelope').classList.remove('open');
+            document.getElementById('secretBtn').style.display = 'block';
+            document.getElementById('typewriterSpace').style.display = 'none';
+            if(typingTimeout) clearTimeout(typingTimeout);
+            
+            // Xóa text cũ trong các dòng
+            for(let i=1; i<=4; i++) {
+                document.getElementById('line' + i).innerHTML = '';
+            }
         }
 
-        function toggleEnvelope() {
-            document.getElementById('envelope').classList.toggle('open');
+        // Click bao thư
+        document.getElementById('envelope').addEventListener('click', function(e) {
+            if (document.getElementById('letterCard').contains(e.target)) {
+                return;
+            }
+            this.classList.toggle('open');
+        });
+
+        // Hàm xử lý typewriter chạy mượt từng dòng
+        function typeWriterEffect(linesConfig, lineIndex) {
+            if (lineIndex >= linesConfig.length) return;
+
+            const currentLine = linesConfig[lineIndex];
+            const element = document.getElementById(currentLine.id);
+            let charIndex = 0;
+
+            // Thêm con trỏ nhấp nháy vào dòng đang chạy
+            element.innerHTML = '<span class="cursor"></span>';
+            const cursor = element.querySelector('.cursor');
+
+            function typeChar() {
+                if (charIndex < currentLine.text.length) {
+                    // Chèn chữ vào trước con trỏ
+                    cursor.insertAdjacentText('beforebegin', currentLine.text[charIndex]);
+                    charIndex++;
+                    // Tốc độ gõ chữ (45ms mỗi ký tự)
+                    typingTimeout = setTimeout(typeChar, 45);
+                    
+                    // Tự động cuộn xuống cuối tờ thư khi chữ dài ra
+                    const card = document.getElementById('letterCard');
+                    card.scrollTop = card.scrollHeight;
+                } else {
+                    // Gõ xong dòng này -> xóa con trỏ cũ đi
+                    cursor.remove();
+                    // Chuyển sang dòng tiếp theo sau 400ms delay ngắn
+                    typingTimeout = setTimeout(() => {
+                        typeWriterEffect(linesConfig, lineIndex + 1);
+                    }, 400);
+                }
+            }
+            typeChar();
+        }
+
+        function revealSecret(event) {
+            event.stopPropagation();
+            document.getElementById('secretBtn').style.display = 'none';
+            document.getElementById('typewriterSpace').style.display = 'block';
+
+            // Config nội dung chạy chữ chuẩn từng dòng theo yêu cầu
+            const textLines = [
+                { id: "line1", text: "Chị biết điều gì không?" },
+                { id: "line2", text: "Cảm ơn chị vì đã xuất hiện trong cuộc sống của em. Dù tụi mình còn cách nhau khá xa, em vẫn rất vui vì được đồng hành cùng chị." },
+                { id: "line3", text: "Hy vọng đây sẽ là sinh nhật đầu tiên trong rất nhiều sinh nhật sau này mà em được chúc chị." },
+                { id: "line4", text: "Yêu chị nhiềuuu ❤️" }
+            ];
+
+            // Kích hoạt chạy chữ từ dòng đầu tiên
+            typeWriterEffect(textLines, 0);
         }
 
         function createConfetti() {
             const colors = ['#ff4d6d', '#ff758c', '#ffbcca', '#fff', '#ffcd3c'];
             const confetti = document.createElement('div');
+            if (document.getElementById('screenLogin').classList.contains('active')) return;
+
             confetti.classList.add('confetti');
             confetti.style.left = Math.random() * 100 + 'vw';
             confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];

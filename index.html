@@ -95,7 +95,7 @@
         }
         @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 
-        /* Màn hình 3: Phong bì chuẩn không lỗi */
+        /* Màn hình 3: Phong bì hạ trọng tâm xuống để nhường chỗ cho thư */
         .envelope-wrapper {
             position: relative; 
             width: 480px; 
@@ -104,7 +104,13 @@
             border-radius: 0 0 10px 10px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.15);
             cursor: pointer; 
-            margin-bottom: 40px;
+            margin-top: 100px; /* Căn chỉnh lại khoảng cách trên màn hình */
+            margin-bottom: 30px;
+            transition: margin-top 0.5s ease-in-out;
+        }
+        /* Khi mở bao thư, tự động hạ bao thư xuống một chút để tờ thư trồi lên vừa tầm mắt */
+        .envelope-wrapper.open {
+            margin-top: 140px;
         }
 
         /* Nắp phong bì */
@@ -114,17 +120,15 @@
             border-top: 160px solid #ff758c; 
             transform-origin: top;
             transition: transform 0.4s ease-in-out; 
-            z-index: 5; /* Luôn nằm trên tờ thư khi chưa mở */
+            z-index: 5;
         }
-        
-        /* Khi mở phong bì, lật nắp lên trên */
         .envelope-wrapper.open:before { 
             transform: rotateX(180deg); 
-            z-index: 1; /* Hạ xuống dưới để lộ thư */
+            z-index: 1; 
             border-top-color: #ff637f;
         }
         
-        /* Thân phong bì cố định phía trước */
+        /* Thân phong bì cố định */
         .envelope-wrapper:after {
             content: ""; position: absolute; bottom: 0; left: 0;
             border-left: 240px solid #ff5573; border-right: 240px solid #ff5573;
@@ -132,7 +136,7 @@
             z-index: 4; border-radius: 0 0 10px 10px;
         }
         
-        /* Tờ thư giấu bên trong */
+        /* Tờ thư giấu bên trong - Tối ưu lại không gian */
         .letter-card {
             position: absolute; 
             bottom: 10px; 
@@ -141,25 +145,25 @@
             height: 290px;
             background: white; 
             border-radius: 5px; 
-            padding: 25px;
+            padding: 20px 25px; /* Giảm nhẹ padding để text gọn gàng */
             transition: transform 0.5s ease-in-out, z-index 0.5s; 
-            z-index: 2; /* Nằm ẩn giữa nắp và thân bao thư */
-            overflow-y: auto;
+            z-index: 2;
+            overflow: hidden;
             box-shadow: 0 0 15px rgba(0,0,0,0.1); 
-            font-size: 1.05rem; 
+            font-size: 1rem; 
             color: #444; 
-            line-height: 1.7;
+            line-height: 1.5;
         }
 
-        /* Khi mở thư: Trồi lên cao hẳn và nhảy z-index lên trên cùng để click đóng lại được */
+        /* Khi mở thư: Trồi lên vừa đủ, tăng chiều cao lên 380px là ôm trọn text ở trung tâm màn hình */
         .envelope-wrapper.open .letter-card { 
-            transform: translateY(-160px); 
+            transform: translateY(-150px); 
             z-index: 6; 
-            height: 360px;
+            height: 380px;
         }
-        .letter-card h2 { color: #ff4d6d; font-size: 1.4rem; text-align: center; margin-bottom: 15px; }
+        .letter-card h2 { color: #ff4d6d; font-size: 1.3rem; text-align: center; margin-bottom: 12px; }
 
-        /* Pháo hoa giấy rơi */
+        /* Pháo hoa giấy */
         .confetti {
             position: absolute; width: 10px; height: 10px;
             animation: drop 2.5s ease-out infinite; z-index: 99;
@@ -191,14 +195,14 @@
         <button class="btn" onclick="nextScreen()">NEXT</button>
     </div>
 
-    <!-- Screen 3: Thư điện tử mượt mà -->
+    <!-- Screen 3: Thư điện tử hoàn chỉnh tầm mắt -->
     <div class="screen" id="screenLetter">
         <div class="envelope-wrapper" id="envelope" onclick="toggleEnvelope()">
             <div class="letter-card">
                 <h2>GỬI EM YÊU CỦA ANH! ❤️</h2>
                 <p>Hello cục nợ của em, chúc mừng sinh nhật tuổi mới nhé! 🎉</p><br>
                 <p>Tuy giờ nghèo rớt mồng tơi, ăn sáng còn không có nhưng tình cảm dành cho chị là vô giá đấy nhớ chưa. Cảm ơn chị vì đã luôn ở bên một thằng hay làm mấy trò khùng điên này. Đợi em hết nghèo dắt em đi ăn sập tiệm sau nha!</p><br>
-                <p style="text-align: right; font-weight: bold; color: #ff4d6d; font-style: italic;">From the people who love you so much 💖</p>
+                <p style="text-align: right; font-weight: bold; color: #ff4d6d; font-style: italic; margin-top: 10px;">From the people who love you so much 💖</p>
             </div>
         </div>
         <button class="btn" style="background: #888; box-shadow: 0 5px #554; font-size: 1.1rem;" onclick="prevScreen()">BACK</button>
@@ -234,7 +238,6 @@
             document.getElementById('screenCake').classList.add('active');
         }
 
-        // Hàm click vào bao thư để đóng/mở mượt mà không lỗi layer
         function toggleEnvelope() {
             document.getElementById('envelope').classList.toggle('open');
         }

@@ -95,7 +95,16 @@
         }
         @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 
-        /* Màn hình 3: Hạ thấp vị trí ban đầu xuống */
+        /* Màn hình 3: Khóa bao thư ở trung tâm hoàn hảo */
+        .envelope-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            margin-top: 60px; /* Tạo khoảng trống nhẹ cho nắp lật lên */
+        }
+
         .envelope-wrapper {
             position: relative; 
             width: 480px; 
@@ -104,13 +113,7 @@
             border-radius: 0 0 10px 10px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.15);
             cursor: pointer; 
-            margin-top: 180px; /* Đẩy bao thư xuống sâu hơn */
             margin-bottom: 20px;
-            transition: margin-top 0.5s ease-in-out;
-        }
-        /* Giữ nguyên vị trí khi mở để không bị rướn lên cao */
-        .envelope-wrapper.open {
-            margin-top: 180px;
         }
 
         /* Nắp phong bì */
@@ -136,7 +139,7 @@
             z-index: 4; border-radius: 0 0 10px 10px;
         }
         
-        /* Tờ thư gọn gàng */
+        /* Tờ thư giấu bên trong */
         .letter-card {
             position: absolute; 
             bottom: 10px; 
@@ -155,11 +158,11 @@
             line-height: 1.5;
         }
 
-        /* Giảm độ trượt lên xuống còn -120px để thư nằm vừa khít tầm nhìn */
+        /* Khi mở thư: Chỉ trượt lên một khoảng ngắn -80px để giữ trung tâm màn hình */
         .envelope-wrapper.open .letter-card { 
-            transform: translateY(-120px); 
+            transform: translateY(-80px); 
             z-index: 6; 
-            height: 380px;
+            height: 350px;
         }
         .letter-card h2 { color: #ff4d6d; font-size: 1.3rem; text-align: center; margin-bottom: 12px; }
 
@@ -195,17 +198,19 @@
         <button class="btn" onclick="nextScreen()">NEXT</button>
     </div>
 
-    <!-- Screen 3: Thư điện tử hạ thấp hoàn hảo -->
+    <!-- Screen 3: Thư điện tử trung tâm hoàn hảo -->
     <div class="screen" id="screenLetter">
-        <div class="envelope-wrapper" id="envelope" onclick="toggleEnvelope()">
-            <div class="letter-card">
-                <h2>GỬI EM YÊU CỦA ANH! ❤️</h2>
-                <p>Hello cục nợ của em, chúc mừng sinh nhật tuổi mới nhé! 🎉</p><br>
-                <p>Tuy giờ nghèo rớt mồng tơi, ăn sáng còn không có nhưng tình cảm dành cho chị là vô giá đấy nhớ chưa. Cảm ơn chị vì đã luôn ở bên một thằng hay làm mấy trò khùng điên này. Đợi em hết nghèo dắt em đi ăn sập tiệm sau nha!</p><br>
-                <p style="text-align: right; font-weight: bold; color: #ff4d6d; font-style: italic; margin-top: 10px;">From the people who love you so much 💖</p>
+        <div class="envelope-container">
+            <div class="envelope-wrapper" id="envelope" onclick="toggleEnvelope()">
+                <div class="letter-card">
+                    <h2>GỬI EM YÊU CỦA ANH! ❤️</h2>
+                    <p>Hello cục nợ của em, chúc mừng sinh nhật tuổi mới nhé! 🎉</p><br>
+                    <p>Tuy giờ nghèo rớt mồng tơi, ăn sáng còn không có nhưng tình cảm dành cho chị là vô giá đấy nhớ chưa. Cảm ơn chị vì đã luôn ở bên một thằng hay làm mấy trò khùng điên này. Đợi em hết nghèo dắt em đi ăn sập tiệm sau nha!</p><br>
+                    <p style="text-align: right; font-weight: bold; color: #ff4d6d; font-style: italic; margin-top: 10px;">From the people who love you so much 💖</p>
+                </div>
             </div>
+            <button class="btn" style="background: #888; box-shadow: 0 5px #554; font-size: 1.1rem;" onclick="prevScreen()">BACK</button>
         </div>
-        <button class="btn" style="background: #888; box-shadow: 0 5px #554; font-size: 1.1rem;" onclick="prevScreen()">BACK</button>
     </div>
 
     <audio id="bgMusic" loop>

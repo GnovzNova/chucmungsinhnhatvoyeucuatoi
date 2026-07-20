@@ -95,7 +95,7 @@
         }
         @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 
-        /* Màn hình 3: Phong bì hạ trọng tâm xuống để nhường chỗ cho thư */
+        /* Màn hình 3: Hạ thấp vị trí ban đầu xuống */
         .envelope-wrapper {
             position: relative; 
             width: 480px; 
@@ -104,13 +104,13 @@
             border-radius: 0 0 10px 10px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.15);
             cursor: pointer; 
-            margin-top: 100px; /* Căn chỉnh lại khoảng cách trên màn hình */
-            margin-bottom: 30px;
+            margin-top: 180px; /* Đẩy bao thư xuống sâu hơn */
+            margin-bottom: 20px;
             transition: margin-top 0.5s ease-in-out;
         }
-        /* Khi mở bao thư, tự động hạ bao thư xuống một chút để tờ thư trồi lên vừa tầm mắt */
+        /* Giữ nguyên vị trí khi mở để không bị rướn lên cao */
         .envelope-wrapper.open {
-            margin-top: 140px;
+            margin-top: 180px;
         }
 
         /* Nắp phong bì */
@@ -128,7 +128,7 @@
             border-top-color: #ff637f;
         }
         
-        /* Thân phong bì cố định */
+        /* Thân phong bì */
         .envelope-wrapper:after {
             content: ""; position: absolute; bottom: 0; left: 0;
             border-left: 240px solid #ff5573; border-right: 240px solid #ff5573;
@@ -136,7 +136,7 @@
             z-index: 4; border-radius: 0 0 10px 10px;
         }
         
-        /* Tờ thư giấu bên trong - Tối ưu lại không gian */
+        /* Tờ thư gọn gàng */
         .letter-card {
             position: absolute; 
             bottom: 10px; 
@@ -145,7 +145,7 @@
             height: 290px;
             background: white; 
             border-radius: 5px; 
-            padding: 20px 25px; /* Giảm nhẹ padding để text gọn gàng */
+            padding: 25px; 
             transition: transform 0.5s ease-in-out, z-index 0.5s; 
             z-index: 2;
             overflow: hidden;
@@ -155,9 +155,9 @@
             line-height: 1.5;
         }
 
-        /* Khi mở thư: Trồi lên vừa đủ, tăng chiều cao lên 380px là ôm trọn text ở trung tâm màn hình */
+        /* Giảm độ trượt lên xuống còn -120px để thư nằm vừa khít tầm nhìn */
         .envelope-wrapper.open .letter-card { 
-            transform: translateY(-150px); 
+            transform: translateY(-120px); 
             z-index: 6; 
             height: 380px;
         }
@@ -195,7 +195,7 @@
         <button class="btn" onclick="nextScreen()">NEXT</button>
     </div>
 
-    <!-- Screen 3: Thư điện tử hoàn chỉnh tầm mắt -->
+    <!-- Screen 3: Thư điện tử hạ thấp hoàn hảo -->
     <div class="screen" id="screenLetter">
         <div class="envelope-wrapper" id="envelope" onclick="toggleEnvelope()">
             <div class="letter-card">

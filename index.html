@@ -95,14 +95,14 @@
         }
         @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 
-        /* Màn hình 3: Khóa bao thư ở trung tâm hoàn hảo */
+        /* Màn hình 3: Đã kéo thấp hẳn xuống */
         .envelope-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             flex-grow: 1;
-            margin-top: 60px; /* Tạo khoảng trống nhẹ cho nắp lật lên */
+            padding-top: 160px; /* Đẩy hẳn cụm bao thư xuống dưới */
         }
 
         .envelope-wrapper {
@@ -113,7 +113,7 @@
             border-radius: 0 0 10px 10px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.15);
             cursor: pointer; 
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         /* Nắp phong bì */
@@ -158,9 +158,9 @@
             line-height: 1.5;
         }
 
-        /* Khi mở thư: Chỉ trượt lên một khoảng ngắn -80px để giữ trung tâm màn hình */
+        /* Khi mở thư: trượt lên vừa đủ tầm nhìn xinh xắn */
         .envelope-wrapper.open .letter-card { 
-            transform: translateY(-80px); 
+            transform: translateY(-90px); 
             z-index: 6; 
             height: 350px;
         }
@@ -198,7 +198,7 @@
         <button class="btn" onclick="nextScreen()">NEXT</button>
     </div>
 
-    <!-- Screen 3: Thư điện tử trung tâm hoàn hảo -->
+    <!-- Screen 3: Thư điện tử chuẩn tầm mắt -->
     <div class="screen" id="screenLetter">
         <div class="envelope-container">
             <div class="envelope-wrapper" id="envelope" onclick="toggleEnvelope()">
@@ -220,6 +220,7 @@
     <script>
         const music = document.getElementById('bgMusic');
 
+        // Mật khẩu dựa theo ngày kỷ niệm/sinh nhật cũ
         function checkPassword() {
             const pass = document.getElementById('passwordInput').value;
             if(pass.trim() === "24072011") {

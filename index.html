@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love 💖</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            text-align: center;
+        }
+        .container { max-width: 600px; padding: 20px; z-index: 10; }
+        h1 { font-size: 2.5rem; color: #ff758c; margin-bottom: 10px; text-shadow: 0 0 10px rgba(255,117,140,0.5); }
+        .sub-title { font-style: italic; color: #ffbcca; margin-bottom: 30px; }
+        
+        /* Hộp quà/Thư */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .card:hover { transform: scale(1.03); }
+        .hidden-content { display: none; margin-top: 20px; line-height: 1.6; font-size: 1.1rem; color: #ffe3e8; }
+        
+        /* Hiệu ứng tim rơi */
+        .heart {
+            position: absolute;
+            color: rgba(255, 117, 140, 0.6);
+            font-size: 20px;
+            animation: fall linear forwards;
+            z-index: 1;
+        }
+        @keyframes fall {
+            to { transform: translateY(105vh) rotate(360deg); }
+        }
+        .btn-music {
+            margin-top: 20px; padding: 10px 20px; border: none; background: #ff758c;
+            color: white; border-radius: 20px; cursor: pointer; font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Chúc Mừng Sinh Nhật Vợ Yêu! 🎂</h1>
+        <p class="sub-title">Chúc Vợ Yêu Sinh Nhật Vui Vẻ Ạaaa</p>
+
+        <div class="card" id="loveCard">
+            <h3 id="clickMe">🎁 Bấm vào đây để mở quà nèee!</h3>
+            <div class="hidden-content" id="letter">
+                <!-- MÀY TỰ THAY VĂN CỦA MÀY VÀO ĐÂY NHA -->
+                <p>Hello cục nợ của em, chúc mừng sinh nhật tuổi mới nhé! 🎉</p>
+                <p>Tuy giờ nghèo rớt mồng tơi, ăn sáng còn không có nhưng tình cảm dành cho chị là vô giá đấy nhớ chưa. Cảm ơn chị vì đã luôn ở bên một thằng hay làm mấy trò khùng điên này. Đợi em hết nghèo dắt em đi ăn sập tiệm sau nha!</p>
+                <p>Yêu chị nhiều lắm! ❤️</p>
+            </div>
+        </div>
+
+        <!-- Chèn tạm cái widget nhạc Lofi từ Youtube, nó hiện cái trình phát nhỏ bên dưới -->
+        <iframe width="0" height="0" id="audioTrack" src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1" frameborder="0" allow="autoplay"></iframe>
+        <button class="btn-music" onclick="playMusic()">🎵 Bật/Tắt Nhạc</button>
+    </div>
+
+    <script>
+        // Mở thư
+        const card = document.getElementById('loveCard');
+        const letter = document.getElementById('letter');
+        const clickMe = document.getElementById('clickMe');
+        
+        card.addEventListener('click', () => {
+            letter.style.display = 'block';
+            clickMe.style.display = 'none';
+        });
+
+        // Tạo tim bay
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.top = '-5vh';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 300);
+
+        // Hàm điều khiển nhạc (vì trình duyệt chặn tự động phát nên phải bấm)
+        function playMusic() {
+            let iframe = document.getElementById('audioTrack');
+            // Đổi link có gỡ mute để phát ra tiếng
+            iframe.src = "https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1";
+        }
+    </script>
+</body>
+</html>

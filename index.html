@@ -365,6 +365,17 @@
             font-weight: bold;
         }
 
+        .footer-date {
+            display: block;
+            margin-top: 22px;
+            text-align: center;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #ffffffcc;
+            letter-spacing: 1px;
+            opacity: .75;
+        }
+
         .cursor {
             display: inline-block;
             width: 2px;
@@ -407,7 +418,7 @@
     <div class="screen active" id="screenLogin">
         <div class="login-card">
             <img src="gau_om_hoa.png" alt="Cute Bear With Flowers">
-            <input type="password" id="passwordInput" placeholder="Password">
+            <input type="password" id="passwordInput" placeholder="Nhập mật khẩu nè baby">
             <button class="btn" style="width: 100%;" onclick="checkPassword()">ENTER</button>
         </div>
     </div>
@@ -444,7 +455,7 @@
                 </div>
             </div>
             <div class="controls">
-                <button class="btn" style="background: #888; box-shadow: 0 5px #554; font-size: 1.1rem;" onclick="prevScreen()">TRỞ LẠI</button>
+                <button class="btn" style="background: #888; box-shadow: 0 5px #554; font-size: 1.1rem;" onclick="prevScreen()">TRở LẠI</button>
             </div>
         </div>
     </div>
@@ -464,6 +475,10 @@
     </audio>
 
     <script>
+        window.onload = () => {
+            document.getElementById("passwordInput").focus();
+        };
+
         const music = document.getElementById('bgMusic');
         let typingTimeout = null;
         let buttonTimer = null;
@@ -524,7 +539,6 @@
             isOpening = false;
         }
 
-        // CÂN ĐẮN BẮN TIM PHÁO MỚI TỪ TÂM CHÍNH GIỮA ENVELOPE
         function spawnFastHearts(envelope, callback) {
             const heartTypes = ['💖', '❤️', '💕'];
             const count = 16;
@@ -537,7 +551,6 @@
                     heart.classList.add('floating-heart');
                     heart.innerText = heartTypes[Math.floor(Math.random() * heartTypes.length)];
                     
-                    // Toả đều từ tâm 50% ra hai bên [-150px, +150px]
                     const randomX = (Math.random() - 0.5) * 300; 
                     heart.style.left = `calc(50% + ${randomX}px)`;
                     heart.style.top = '30%';
@@ -652,7 +665,18 @@
                     }
                 } else {
                     typingTimeout = setTimeout(() => {
-                        closeBtn.classList.add('visible');
+                        const footerSpan = document.createElement('span');
+                        footerSpan.classList.add('footer-date');
+                        footerSpan.innerHTML = `
+                        24.07.2011 ✦ 24.07.2026
+                        <br>
+                        <span class="highlight-text">15th Birthday ❤️</span>
+                        `;
+                        cursor.insertAdjacentElement('beforebegin', footerSpan);
+
+                        typingTimeout = setTimeout(() => {
+                            closeBtn.classList.add('visible');
+                        }, 2000);
                     }, 2000);
                 }
             }

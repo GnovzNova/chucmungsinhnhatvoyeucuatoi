@@ -444,6 +444,7 @@
         <button class="close-overlay-btn" id="closeOverlayBtn" onclick="closeSecretOverlay()">Đóng lại ❤️</button>
     </div>
 
+    <!-- SỬA LINK MP3 YÊU LÀ ĐÂY Ở ĐÂY NÈ -->
     <audio id="bgMusic" loop>
         <source src="iu_la_day.mp3" type="audio/mpeg">
     </audio>
@@ -475,6 +476,16 @@
         function checkPassword() {
             const pass = document.getElementById('passwordInput').value;
             if(pass.trim() === "24072011") {
+                // TỰ ĐỘNG BUNG FULL MÀN HÌNH LÚC BẤM ENTER
+                let docElm = document.documentElement;
+                if (docElm.requestFullscreen) {
+                    docElm.requestFullscreen();
+                } else if (docElm.webkitRequestFullscreen) {
+                    docElm.webkitRequestFullscreen();
+                } else if (docElm.msRequestFullscreen) {
+                    docElm.msRequestFullscreen();
+                }
+
                 document.getElementById('screenLogin').classList.remove('active');
                 document.getElementById('screenCake').classList.add('active');
                 music.play().catch(e => console.log(e));

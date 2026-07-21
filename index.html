@@ -189,15 +189,15 @@
             margin-top: 10px;
         }
 
-        /* Content bên trong thư - FIX ẨN SCROLLBAR & VỪA VẶN CHỮ */
+        /* Content bên trong thư - DIỆT THANH CUỘN */
         .letter-content {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: white; 
             border-radius: 8px; 
-            padding: 16px 20px; 
+            padding: 15px 20px; 
             box-shadow: 0 0 15px rgba(0,0,0,0.15); 
-            font-size: 0.92rem; 
+            font-size: 0.9rem; 
             color: #444; 
             line-height: 1.45;
             display: flex;
@@ -206,7 +206,16 @@
             opacity: 0;
             transform: scaleY(0.8);
             transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
-            overflow: hidden; /* Bỏ thanh cuộn hoàn toàn */
+            overflow: hidden !important; 
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        /* Triệt hạ scrollbar Chrome/Safari/Edge */
+        .letter-content::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
         }
 
         .envelope-wrapper.open-letter .letter-card { 
@@ -229,7 +238,7 @@
             height: 100%;
         }
 
-        .letter-content h2 { color: #ff4d6d; font-size: 1.1rem; text-align: center; margin-bottom: 8px; }
+        .letter-content h2 { color: #ff4d6d; font-size: 1.1rem; text-align: center; margin-bottom: 6px; }
         .letter-text p { margin-bottom: 6px; text-indent: 10px; text-align: justify; }
 
         /* Tim to & Bay nhanh trong 2s */
@@ -415,7 +424,7 @@
                             <p>Chúc chị yêu của em tuổi mới luôn khỏe mạnh, luôn cười thật nhiều và gặp thật nhiều may mắn.</p>
                             <p>Mong tuổi mới sẽ mang đến cho chị thật nhiều điều tốt đẹp, ít áp lực hơn, nhiều tiếng cười hơn và luôn có những người yêu thương chị ở bên.</p>
                         </div>
-                        <p style="text-align: right; font-weight: bold; margin-top: 5px;">Yêu chị. ❤️</p>
+                        <p style="text-align: right; font-weight: bold;">Yêu chị. ❤️</p>
                     </div>
                 </div>
             </div>
@@ -491,7 +500,6 @@
             isOpening = false;
         }
 
-        // Bắn trái tim to & bay trong 2s
         function spawnFastHearts(envelope, callback) {
             const heartTypes = ['💖', '❤️', '💕'];
             const count = 14;
@@ -532,11 +540,9 @@
             }
         }
 
-        // Logic tương tác lá thư
         const envelope = document.getElementById('envelope');
         const letterCover = document.getElementById('letterCover');
 
-        // Click 1: Mở nắp bao thư + tim bay
         envelope.addEventListener('click', function(e) {
             if (isOpening) return;
 
@@ -553,9 +559,8 @@
             }
         });
 
-        // Click 2: CHỈ CHO PHÉP click đúng vào chữ "Dear My Baby ❤️" (letterCover) để bung thư
         letterCover.addEventListener('click', function(e) {
-            e.stopPropagation(); // Chặn lan event click ra ngoài envelope
+            e.stopPropagation();
 
             if (envelope.classList.contains('open-letter') && !envelope.classList.contains('unfold-letter')) {
                 envelope.classList.add('unfold-letter');

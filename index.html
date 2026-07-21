@@ -372,13 +372,19 @@
         }
         .close-overlay-btn:hover { background: #ff4d6d; color: white; }
 
+        /* FIX: ÉP PHÁO HOA SPAWN TRÊN CÙNG MÀN HÌNH */
         .confetti {
-            position: absolute; width: 10px; height: 10px;
-            animation: drop 2.5s ease-out infinite; z-index: 99;
+            position: fixed;
+            top: -20px;
+            width: 10px;
+            height: 10px;
+            animation: drop 2.5s linear infinite;
+            z-index: 99;
+            pointer-events: none;
         }
         @keyframes drop {
-            0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
         }
 
         .controls { display: flex; gap: 15px; }
@@ -402,7 +408,6 @@
             <div class="candle"><div class="flame"></div></div>
             <div class="cake"></div>
         </div>
-        <!-- ĐÃ ĐỔI THÀNH BẤM VÀO ĐÂY NÈ -->
         <button class="btn" onclick="nextScreen()">BẤM VÀO ĐÂY NÈ</button>
     </div>
 
@@ -429,7 +434,6 @@
                 </div>
             </div>
             <div class="controls">
-                <!-- ĐÃ ĐỔI THÀNH TRỞ LẠI -->
                 <button class="btn" style="background: #888; box-shadow: 0 5px #554; font-size: 1.1rem;" onclick="prevScreen()">TRỞ LẠI</button>
             </div>
         </div>

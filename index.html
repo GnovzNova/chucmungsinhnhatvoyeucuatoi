@@ -189,7 +189,7 @@
             margin-top: 10px;
         }
 
-        /* Content bên trong thư - DIỆT THANH CUỘN */
+        /* Content bên trong thư */
         .letter-content {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -207,11 +207,10 @@
             transform: scaleY(0.8);
             transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
             overflow: hidden !important; 
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
-        /* Triệt hạ scrollbar Chrome/Safari/Edge */
         .letter-content::-webkit-scrollbar {
             display: none !important;
             width: 0 !important;
@@ -403,7 +402,8 @@
             <div class="candle"><div class="flame"></div></div>
             <div class="cake"></div>
         </div>
-        <button class="btn" onclick="nextScreen()">NEXT</button>
+        <!-- ĐÃ ĐỔI THÀNH BẤM VÀO ĐÂY NÈ -->
+        <button class="btn" onclick="nextScreen()">BẤM VÀO ĐÂY NÈ</button>
     </div>
 
     <div class="screen" id="screenLetter">
@@ -429,7 +429,8 @@
                 </div>
             </div>
             <div class="controls">
-                <button class="btn" style="background: #888; box-shadow: 0 5px #554; font-size: 1.1rem;" onclick="prevScreen()">BACK</button>
+                <!-- ĐÃ ĐỔI THÀNH TRỞ LẠI -->
+                <button class="btn" style="background: #888; box-shadow: 0 5px #554; font-size: 1.1rem;" onclick="prevScreen()">TRỞ LẠI</button>
             </div>
         </div>
     </div>
@@ -444,7 +445,6 @@
         <button class="close-overlay-btn" id="closeOverlayBtn" onclick="closeSecretOverlay()">Đóng lại ❤️</button>
     </div>
 
-    <!-- SỬA LINK MP3 YÊU LÀ ĐÂY Ở ĐÂY NÈ -->
     <audio id="bgMusic" loop>
         <source src="iu_la_day.mp3" type="audio/mpeg">
     </audio>
@@ -476,7 +476,6 @@
         function checkPassword() {
             const pass = document.getElementById('passwordInput').value;
             if(pass.trim() === "24072011") {
-                // TỰ ĐỘNG BUNG FULL MÀN HÌNH LÚC BẤM ENTER
                 let docElm = document.documentElement;
                 if (docElm.requestFullscreen) {
                     docElm.requestFullscreen();

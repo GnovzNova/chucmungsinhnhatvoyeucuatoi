@@ -213,9 +213,10 @@
             z-index: 6; 
         }
 
+        /* FIX: Giữ nguyên kích thước 230px khi mở bung */
         .envelope-wrapper.unfold-letter .letter-card {
-            height: 320px;
-            transform: translateY(-150px);
+            height: 230px;
+            transform: translateY(-130px);
         }
         .envelope-wrapper.unfold-letter .letter-cover {
             opacity: 0;
@@ -225,7 +226,7 @@
         .envelope-wrapper.unfold-letter .letter-content {
             opacity: 1;
             transform: scaleY(1);
-            height: 320px;
+            height: 100%;
         }
 
         .letter-content h2 { color: #ff4d6d; font-size: 1.15rem; text-align: center; margin-bottom: 12px; }

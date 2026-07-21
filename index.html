@@ -17,7 +17,6 @@
             position: relative;
         }
 
-        /* Hiệu ứng bầu trời sao */
         .stars {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -35,11 +34,9 @@
             100% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* Hệ thống màn hình */
         .screen { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100vh; position: relative; z-index: 1; }
         .active { display: flex; }
         
-        /* Màn hình 1: Đăng nhập */
         .login-card {
             background: rgba(255, 255, 255, 0.95);
             padding: 25px;
@@ -63,7 +60,6 @@
         }
         .login-card input::placeholder { color: #ffbcca; }
         
-        /* Nút bấm tổng thể */
         .btn {
             background-color: #ff4d6d;
             color: white;
@@ -80,7 +76,6 @@
         }
         .btn:active { box-shadow: 0 0 #c92a42; transform: translateY(5px); }
 
-        /* Màn hình 2: Bánh Kem */
         .cake-text {
             font-size: 2.2rem;
             color: #fff;
@@ -115,7 +110,6 @@
         }
         @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 
-        /* Màn hình 3: Thư trên nền trời sao */
         .envelope-container {
             display: flex;
             flex-direction: column;
@@ -135,7 +129,6 @@
             margin-bottom: 20px;
         }
 
-        /* Nắp phong bì */
         .envelope-wrapper:before {
             content: ""; position: absolute; top: 0; left: 0;
             border-left: 220px solid transparent; border-right: 220px solid transparent;
@@ -145,13 +138,12 @@
             z-index: 5;
             cursor: pointer;
         }
-        .envelope-wrapper.open:before { 
+        .envelope-wrapper.open-lid:before { 
             transform: rotateX(180deg); 
             z-index: 1; 
             border-top-color: #ff637f;
         }
         
-        /* Thân phong bì */
         .envelope-wrapper:after {
             content: ""; position: absolute; bottom: 0; left: 0;
             border-left: 220px solid #ff5573; border-right: 220px solid #ff5573;
@@ -160,7 +152,6 @@
             pointer-events: none;
         }
         
-        /* Tờ thư */
         .letter-card {
             position: absolute; 
             bottom: 10px; 
@@ -170,7 +161,7 @@
             background: white; 
             border-radius: 5px; 
             padding: 20px 20px 15px 20px; 
-            transition: transform 0.5s ease-in-out, z-index 0.5s; 
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.8s; 
             z-index: 2;
             box-shadow: 0 0 15px rgba(0,0,0,0.1); 
             font-size: 0.95rem; 
@@ -180,7 +171,7 @@
             flex-direction: column;
         }
 
-        .envelope-wrapper.open .letter-card { 
+        .envelope-wrapper.open-letter .letter-card { 
             transform: translateY(-110px); 
             z-index: 6; 
             height: 310px;
@@ -188,40 +179,37 @@
         .letter-card h2 { color: #ff4d6d; font-size: 1.15rem; text-align: center; margin-bottom: 10px; }
         .letter-text p { margin-bottom: 8px; text-indent: 10px; text-align: justify; }
 
-        /* Animation Trái tim chui ra nổ bong bóng */
+        /* Animation trái tim bay chậm kiểu bóng bay */
         .floating-heart {
             position: absolute;
-            font-size: 1.5rem;
+            font-size: var(--size);
             pointer-events: none;
             z-index: 10;
             user-select: none;
-            animation: floatAndPop var(--duration) ease-out forwards;
+            animation: floatUpBalloon var(--duration) linear forwards;
+            filter: drop-shadow(0 2px 5px rgba(255, 77, 109, 0.4));
         }
 
-        @keyframes floatAndPop {
+        @keyframes floatUpBalloon {
             0% {
                 opacity: 0;
-                transform: translate(0, 0) scale(0.3) rotate(0deg);
+                transform: translateY(0) scale(0.6) rotate(0deg);
             }
-            30% {
+            15% {
                 opacity: 1;
-                transform: translate(var(--tx-mid), var(--ty-mid)) scale(1.3) rotate(var(--rot));
             }
-            75% {
-                opacity: 1;
-                transform: translate(var(--tx-end), var(--ty-end)) scale(1.6) rotate(var(--rot));
+            50% {
+                transform: translateY(calc(var(--fly-dist) * -0.5)) scale(1.1) rotate(var(--sway-1));
             }
             85% {
                 opacity: 0.9;
-                transform: translate(var(--tx-end), var(--ty-end)) scale(2.2) rotate(var(--rot));
             }
             100% {
                 opacity: 0;
-                transform: translate(var(--tx-end), var(--ty-end)) scale(3) rotate(var(--rot));
+                transform: translateY(calc(var(--fly-dist) * -1)) scale(1.2) rotate(var(--sway-2));
             }
         }
 
-        /* Nút ở góc màn hình */
         .secret-corner-btn {
             display: block;
             position: fixed;
@@ -250,7 +238,6 @@
             background-color: #c92a42;
         }
 
-        /* Lớp nền mờ fade 1 giây */
         .overlay-blur {
             display: flex;
             position: fixed;
@@ -272,7 +259,6 @@
             pointer-events: auto;
         }
 
-        /* Hộp thoại Typewriter */
         .typewriter-box {
             max-width: 600px;
             width: 90%;
@@ -302,7 +288,6 @@
             font-weight: bold;
         }
 
-        /* Con trỏ gõ chữ */
         .cursor {
             display: inline-block;
             width: 2px;
@@ -314,7 +299,6 @@
         }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* Nút đóng lớp mờ overlay */
         .close-overlay-btn {
             opacity: 0;
             pointer-events: none;
@@ -337,7 +321,6 @@
             color: white;
         }
 
-        /* Pháo hoa giấy */
         .confetti {
             position: absolute; width: 10px; height: 10px;
             animation: drop 2.5s ease-out infinite; z-index: 99;
@@ -354,7 +337,6 @@
 
     <div class="stars" id="starsContainer"></div>
 
-    <!-- Screen 1: Login -->
     <div class="screen active" id="screenLogin">
         <div class="login-card">
             <img src="gau_om_hoa.png" alt="Cute Bear With Flowers">
@@ -363,7 +345,6 @@
         </div>
     </div>
 
-    <!-- Screen 2: Bánh kem -->
     <div class="screen" id="screenCake">
         <div class="cake-text">HAPPY<br>BIRTHDAY<br>CHỊ YÊU</div>
         <div class="cake-container">
@@ -373,7 +354,6 @@
         <button class="btn" onclick="nextScreen()">NEXT</button>
     </div>
 
-    <!-- Screen 3: Thư điện tử -->
     <div class="screen" id="screenLetter">
         <div class="envelope-container">
             <div class="envelope-wrapper" id="envelope">
@@ -392,10 +372,8 @@
         </div>
     </div>
 
-    <!-- Nút góc màn hình xuất hiện sau 5s mở thư -->
     <button class="secret-corner-btn" id="cornerSecretBtn" onclick="openSecretOverlay(event)">Chị biết điều gì không?</button>
 
-    <!-- Màn hình mờ Overlay hiện Typewriter -->
     <div class="overlay-blur" id="secretOverlay">
         <div class="typewriter-box">
             <div class="secret-title">Chị biết điều gì không?</div>
@@ -412,6 +390,7 @@
         const music = document.getElementById('bgMusic');
         let typingTimeout = null;
         let buttonTimer = null;
+        let isOpening = false;
 
         function generateStars() {
             const container = document.getElementById('starsContainer');
@@ -451,70 +430,88 @@
         function prevScreen() {
             document.getElementById('screenLetter').classList.remove('active');
             document.getElementById('screenCake').classList.add('active');
-            document.getElementById('envelope').classList.remove('open');
+            const env = document.getElementById('envelope');
+            env.classList.remove('open-lid', 'open-letter');
             document.getElementById('cornerSecretBtn').classList.remove('visible');
             if(buttonTimer) clearTimeout(buttonTimer);
             closeSecretOverlay();
+            isOpening = false;
         }
 
-        // Tạo hiệu ứng trái tim chui ra & nổ như bóng bóng
-        function spawnHeartBubbles(envelope) {
-            const heartTypes = ['💖', '❤️', '💗', '💕', '✨', '🌸'];
-            const count = 18; 
-            
+        // Logic thả bong bóng trái tim đều và chậm
+        function spawnBalloonHearts(envelope, callback) {
+            const heartTypes = ['💖', '❤️', '💗', '💕', '🌸', '✨'];
+            const count = 12;
+            const intervalTime = 250;
+            let completed = 0;
+
             for (let i = 0; i < count; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('div');
                     heart.classList.add('floating-heart');
                     heart.innerText = heartTypes[Math.floor(Math.random() * heartTypes.length)];
                     
-                    heart.style.left = '50%';
-                    heart.style.top = '40%';
+                    const randomX = Math.random() * 260 - 130; 
+                    heart.style.left = `calc(50% + ${randomX}px)`;
+                    heart.style.top = '30%';
                     
-                    const angle = Math.random() * Math.PI * 2;
-                    const distanceMid = Math.random() * 120 + 80;
-                    const distanceEnd = distanceMid + Math.random() * 60 + 30;
-                    
-                    const txMid = Math.cos(angle) * distanceMid + 'px';
-                    const tyMid = (Math.sin(angle) * distanceMid - 60) + 'px'; 
-                    const txEnd = Math.cos(angle) * distanceEnd + 'px';
-                    const tyEnd = (Math.sin(angle) * distanceEnd - 100) + 'px'; 
-                    const rot = (Math.random() * 60 - 30) + 'deg';
-                    const duration = (Math.random() * 0.6 + 1.2) + 's';
+                    const size = (Math.random() * 0.8 + 1.2) + 'rem';
+                    const duration = (Math.random() * 1.0 + 2.5) + 's';
+                    const flyDist = (Math.random() * 150 + 250) + 'px';
+                    const sway1 = (Math.random() * 30 - 15) + 'deg';
+                    const sway2 = (Math.random() * 40 - 20) + 'deg';
 
-                    heart.style.setProperty('--tx-mid', txMid);
-                    heart.style.setProperty('--ty-mid', tyMid);
-                    heart.style.setProperty('--tx-end', txEnd);
-                    heart.style.setProperty('--ty-end', tyEnd);
-                    heart.style.setProperty('--rot', rot);
+                    heart.style.setProperty('--size', size);
                     heart.style.setProperty('--duration', duration);
+                    heart.style.setProperty('--fly-dist', flyDist);
+                    heart.style.setProperty('--sway-1', sway1);
+                    heart.style.setProperty('--sway-2', sway2);
 
                     envelope.appendChild(heart);
 
-                    setTimeout(() => { heart.remove(); }, 2000);
-                }, i * 40); 
+                    setTimeout(() => {
+                        heart.remove();
+                        completed++;
+                        if (completed === count && callback) {
+                            callback();
+                        }
+                    }, parseFloat(duration) * 1000);
+
+                }, i * intervalTime);
             }
         }
 
-        // Click mở/đóng bao thư & chờ đúng 5 giây mới hiện nút
+        // Quá trình mở bao thư từng bước
         document.getElementById('envelope').addEventListener('click', function(e) {
-            if (document.getElementById('letterCard').contains(e.target)) return;
-            const isOpen = this.classList.toggle('open');
+            if (document.getElementById('letterCard').contains(e.target) || isOpening) return;
+            
+            const env = this;
             const cornerBtn = document.getElementById('cornerSecretBtn');
 
-            if(buttonTimer) clearTimeout(buttonTimer);
+            if (!env.classList.contains('open-lid')) {
+                isOpening = true;
+                env.classList.add('open-lid');
 
-            if (isOpen) {
-                // Thêm hiệu ứng trái tim phọt ra nổ
-                spawnHeartBubbles(this);
+                setTimeout(() => {
+                    spawnBalloonHearts(env, () => {
+                        // Tim bay hết mới rút lá thư lên
+                        env.classList.add('open-letter');
+                        isOpening = false;
 
-                buttonTimer = setTimeout(() => {
-                    if(document.getElementById('envelope').classList.contains('open')) {
-                        cornerBtn.classList.add('visible');
-                    }
-                }, 5000);
+                        // Hiện nút ẩn sau 5s
+                        buttonTimer = setTimeout(() => {
+                            if (env.classList.contains('open-letter')) {
+                                cornerBtn.classList.add('visible');
+                            }
+                        }, 5000);
+                    });
+                }, 400);
+
             } else {
+                env.classList.remove('open-lid', 'open-letter');
                 cornerBtn.classList.remove('visible');
+                if (buttonTimer) clearTimeout(buttonTimer);
+                isOpening = false;
             }
         });
 
@@ -531,7 +528,7 @@
         function openSecretOverlay(event) {
             event.stopPropagation();
             const overlay = document.getElementById('secretOverlay');
-            overlay.classList.add('active'); 
+            overlay.classList.add('active');
             
             const target = document.getElementById('typewriterTarget');
             target.innerHTML = '<span class="cursor"></span>';
@@ -576,7 +573,6 @@
                 }
             }
             
-            // Chờ đúng 1.5 giây (1500ms) sau mới bắt đầu viết!
             typingTimeout = setTimeout(typeProcess, 1500);
         }
 

@@ -63,7 +63,7 @@
         }
         .login-card input::placeholder { color: #ffbcca; }
         
-        /* Nút bấm tổng thể */
+        /* Nút bấm */
         .btn {
             background-color: #ff4d6d;
             color: white;
@@ -115,31 +115,31 @@
         }
         @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 
-        /* Màn hình 3: Thư trên nền trời sao */
+        /* Màn hình 3: Phong Bì Thư */
         .envelope-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            flex-grow: 1;
-            padding-top: 150px;
+            justify-content: flex-end;
+            height: 100vh;
+            padding-bottom: 80px;
         }
 
         .envelope-wrapper {
             position: relative; 
-            width: 480px; 
-            height: 320px; 
+            width: 440px; 
+            height: 280px; 
             background-color: #ff758c; 
             border-radius: 0 0 10px 10px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         /* Nắp phong bì */
         .envelope-wrapper:before {
             content: ""; position: absolute; top: 0; left: 0;
-            border-left: 240px solid transparent; border-right: 240px solid transparent;
-            border-top: 160px solid #ff758c; 
+            border-left: 220px solid transparent; border-right: 220px solid transparent;
+            border-top: 140px solid #ff758c; 
             transform-origin: top;
             transition: transform 0.4s ease-in-out; 
             z-index: 5;
@@ -154,26 +154,26 @@
         /* Thân phong bì */
         .envelope-wrapper:after {
             content: ""; position: absolute; bottom: 0; left: 0;
-            border-left: 240px solid #ff5573; border-right: 240px solid #ff5573;
-            border-bottom: 160px solid #ff4d6d; border-top: 160px solid transparent;
+            border-left: 220px solid #ff5573; border-right: 220px solid #ff5573;
+            border-bottom: 140px solid #ff4d6d; border-top: 140px solid transparent;
             z-index: 4; border-radius: 0 0 10px 10px;
             pointer-events: none;
         }
         
-        /* Tờ thư */
+        /* FIX REQUIREMENT 2: Giảm translateY(-110px) để lá thư không dội lên quá cao */
         .letter-card {
             position: absolute; 
             bottom: 10px; 
             left: 20px; 
-            width: 440px; 
-            height: 290px;
+            width: 400px; 
+            height: 250px;
             background: white; 
             border-radius: 5px; 
-            padding: 25px 25px 20px 25px; 
+            padding: 20px 20px 15px 20px; 
             transition: transform 0.5s ease-in-out, z-index 0.5s; 
             z-index: 2;
             box-shadow: 0 0 15px rgba(0,0,0,0.1); 
-            font-size: 1rem; 
+            font-size: 0.95rem; 
             color: #444; 
             line-height: 1.5;
             display: flex;
@@ -181,16 +181,16 @@
         }
 
         .envelope-wrapper.open .letter-card { 
-            transform: translateY(-150px); 
+            transform: translateY(-110px); 
             z-index: 6; 
-            height: 380px;
+            height: 310px;
         }
-        .letter-card h2 { color: #ff4d6d; font-size: 1.25rem; text-align: center; margin-bottom: 12px; }
+        .letter-card h2 { color: #ff4d6d; font-size: 1.15rem; text-align: center; margin-bottom: 10px; }
         .letter-text p { margin-bottom: 8px; text-indent: 10px; text-align: justify; }
 
-        /* Nút ở góc dưới màn hình (Chỉ xuất hiện khi mở thư) */
+        /* FIX REQUIREMENT 1: Nút góc màn hình xuất hiện mượt sau 5 giây */
         .secret-corner-btn {
-            display: none;
+            display: block;
             position: fixed;
             bottom: 30px;
             right: 30px;
@@ -204,19 +204,25 @@
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(255, 77, 109, 0.4);
             z-index: 10;
-            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease, transform 0.3s ease;
+        }
+        .secret-corner-btn.visible {
+            opacity: 1;
+            pointer-events: auto;
         }
         .secret-corner-btn:hover {
             transform: scale(1.05);
             background-color: #c92a42;
         }
 
-        /* Lớp nền mờ khi kích hoạt nút bí mật */
+        /* FIX REQUIREMENT 3: Màn hình mờ Overlay có transition opacity 1s */
         .overlay-blur {
-            display: none;
+            display: flex;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(9, 10, 15, 0.85);
+            background: rgba(9, 10, 15, 0.88);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             z-index: 20;
@@ -224,6 +230,13 @@
             align-items: center;
             flex-direction: column;
             padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+        }
+        .overlay-blur.active {
+            opacity: 1;
+            pointer-events: auto;
         }
 
         /* Hộp thoại Typewriter */
@@ -231,10 +244,21 @@
             max-width: 600px;
             width: 90%;
             color: #ffbcca;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             line-height: 1.8;
             text-align: left;
         }
+        
+        /* FIX REQUIREMENT 4: Tiêu đề "Chị biết điều gì không?" */
+        .secret-title {
+            color: #ff4d6d;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+        }
+
         .typewriter-content {
             min-height: 150px;
             white-space: pre-wrap;
@@ -246,11 +270,10 @@
             font-weight: bold;
         }
 
-        /* Con trỏ nhấp nháy */
         .cursor {
             display: inline-block;
             width: 2px;
-            height: 22px;
+            height: 20px;
             background-color: #ff4d6d;
             margin-left: 3px;
             animation: blink 0.6s infinite;
@@ -258,9 +281,10 @@
         }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* Nút đóng lớp mờ overlay */
+        /* FIX REQUIREMENT 5: Nút đóng ẩn mặc định, viết xong 2s mới hiện */
         .close-overlay-btn {
-            display: none;
+            opacity: 0;
+            pointer-events: none;
             margin-top: 40px;
             background: transparent;
             border: 2px solid #ff4d6d;
@@ -269,13 +293,18 @@
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: opacity 0.5s ease, background 0.2s;
+        }
+        .close-overlay-btn.visible {
+            opacity: 1;
+            pointer-events: auto;
         }
         .close-overlay-btn:hover {
             background: #ff4d6d;
             color: white;
         }
 
+        /* Pháo hoa giấy */
         .confetti {
             position: absolute; width: 10px; height: 10px;
             animation: drop 2.5s ease-out infinite; z-index: 99;
@@ -292,7 +321,7 @@
 
     <div class="stars" id="starsContainer"></div>
 
-    <!-- Màn hình 1: Login -->
+    <!-- Screen 1: Login -->
     <div class="screen active" id="screenLogin">
         <div class="login-card">
             <img src="gau_om_hoa.png" alt="Cute Bear With Flowers">
@@ -301,7 +330,7 @@
         </div>
     </div>
 
-    <!-- Màn hình 2: Bánh kem -->
+    <!-- Screen 2: Bánh kem -->
     <div class="screen" id="screenCake">
         <div class="cake-text">HAPPY<br>BIRTHDAY<br>CHỊ YÊU</div>
         <div class="cake-container">
@@ -311,7 +340,7 @@
         <button class="btn" onclick="nextScreen()">NEXT</button>
     </div>
 
-    <!-- Màn hình 3: Thư điện tử -->
+    <!-- Screen 3: Thư điện tử -->
     <div class="screen" id="screenLetter">
         <div class="envelope-container">
             <div class="envelope-wrapper" id="envelope">
@@ -330,12 +359,13 @@
         </div>
     </div>
 
-    <!-- Nút góc màn hình (Ban đầu ẩn) -->
+    <!-- Nút góc màn hình (Hiện sau 5s mở thư) -->
     <button class="secret-corner-btn" id="cornerSecretBtn" onclick="openSecretOverlay(event)">Chị biết điều gì không?</button>
 
-    <!-- Màn hình mờ gõ chữ Typewriter -->
+    <!-- Overlay mờ từ từ 1s + Tiêu đề + Typewriter -->
     <div class="overlay-blur" id="secretOverlay">
         <div class="typewriter-box">
+            <div class="secret-title">Chị biết điều gì không?</div>
             <div class="typewriter-content" id="typewriterTarget"></div>
         </div>
         <button class="close-overlay-btn" id="closeOverlayBtn" onclick="closeSecretOverlay()">Đóng lại ❤️</button>
@@ -348,6 +378,7 @@
     <script>
         const music = document.getElementById('bgMusic');
         let typingTimeout = null;
+        let buttonTimer = null;
 
         function generateStars() {
             const container = document.getElementById('starsContainer');
@@ -367,18 +398,6 @@
         }
         generateStars();
 
-        function handleCornerButtonVisibility() {
-            const letterScreenActive = document.getElementById('screenLetter').classList.contains('active');
-            const envelopeOpen = document.getElementById('envelope').classList.contains('open');
-            const cornerBtn = document.getElementById('cornerSecretBtn');
-            
-            if (letterScreenActive && envelopeOpen) {
-                cornerBtn.style.display = 'block';
-            } else {
-                cornerBtn.style.display = 'none';
-            }
-        }
-
         function checkPassword() {
             const pass = document.getElementById('passwordInput').value;
             if(pass.trim() === "24072011") {
@@ -394,40 +413,57 @@
         function nextScreen() {
             document.getElementById('screenCake').classList.remove('active');
             document.getElementById('screenLetter').classList.add('active');
-            handleCornerButtonVisibility();
         }
 
         function prevScreen() {
             document.getElementById('screenLetter').classList.remove('active');
             document.getElementById('screenCake').classList.add('active');
             document.getElementById('envelope').classList.remove('open');
-            handleCornerButtonVisibility();
+            document.getElementById('cornerSecretBtn').classList.remove('visible');
+            if(buttonTimer) clearTimeout(buttonTimer);
             closeSecretOverlay();
         }
 
+        // FIX 1: Bấm mở thư -> setTimeout 5000ms rồi mới hiện nút góc
         document.getElementById('envelope').addEventListener('click', function(e) {
             if (document.getElementById('letterCard').contains(e.target)) return;
-            this.classList.toggle('open');
-            setTimeout(handleCornerButtonVisibility, 500); 
+            const isOpen = this.classList.toggle('open');
+            const cornerBtn = document.getElementById('cornerSecretBtn');
+
+            if(buttonTimer) clearTimeout(buttonTimer);
+
+            if (isOpen) {
+                buttonTimer = setTimeout(() => {
+                    if(document.getElementById('envelope').classList.contains('open')) {
+                        cornerBtn.classList.add('visible');
+                    }
+                }, 5000);
+            } else {
+                cornerBtn.classList.remove('visible');
+            }
         });
 
-        // Chia chuỗi theo các cụm ngắt của mày
         const phrases = [
             "Cảm ơn chị ",
-            "vì đã xuất hiện trong cuộc sống của em.\n",
+            "vì đã xuất hiện trong cuộc sống của em. \n",
             "Dù tụi mình còn cách nhau khá xa, ",
-            "em vẫn rất vui vì được đồng hành cùng chị.\n\n",
+            "em vẫn rất vui vì được đồng hành cùng chị. \n\n",
             "Hy vọng đây sẽ là sinh nhật đầu tiên ",
-            "trong rất nhiều sinh nhật sau này mà em được chúc chị.\n\n",
+            "trong rất nhiều sinh nhật sau này mà em được chúc chị. \n\n",
             "Yêu chị nhiềuuu ❤️"
         ];
 
+        // FIX 3 & 4 & 5: Mở màn hình mờ + Gõ chữ + Chờ 2s hiện nút Đóng
         function openSecretOverlay(event) {
             event.stopPropagation();
-            document.getElementById('secretOverlay').style.display = 'flex';
+            const overlay = document.getElementById('secretOverlay');
+            overlay.classList.add('active'); // mờ từ từ trong 1s nhờ css transition
+            
             const target = document.getElementById('typewriterTarget');
             target.innerHTML = '<span class="cursor"></span>';
-            document.getElementById('closeOverlayBtn').style.display = 'none';
+            
+            const closeBtn = document.getElementById('closeOverlayBtn');
+            closeBtn.classList.remove('visible');
             
             if(typingTimeout) clearTimeout(typingTimeout);
             
@@ -453,23 +489,30 @@
                         }
                         
                         charIndex++;
-                        typingTimeout = setTimeout(typeProcess, 85); // Tốc độ gõ ký tự chậm lại tình cảm
+                        typingTimeout = setTimeout(typeProcess, 85);
                     } else {
                         phraseIndex++;
                         charIndex = 0;
-                        typingTimeout = setTimeout(typeProcess, 550); // Khựng lại 0.5s giữa các cụm /
+                        typingTimeout = setTimeout(typeProcess, 550);
                     }
                 } else {
-                    document.getElementById('closeOverlayBtn').style.display = 'block';
+                    // FIX 5: Viết xong hết -> đợi đúng 2s (2000ms) mới hiện nút Đóng lại
+                    typingTimeout = setTimeout(() => {
+                        closeBtn.classList.add('visible');
+                    }, 2000);
                 }
             }
             
-            typingTimeout = setTimeout(typeProcess, 600);
+            // Đợi mờ nền 1s xong thì mới bắt đầu hiệu ứng gõ chữ
+            typingTimeout = setTimeout(typeProcess, 1000);
         }
 
         function closeSecretOverlay() {
-            document.getElementById('secretOverlay').style.display = 'none';
-            document.getElementById('typewriterTarget').innerHTML = '';
+            const overlay = document.getElementById('secretOverlay');
+            overlay.classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('typewriterTarget').innerHTML = '';
+            }, 1000);
             if(typingTimeout) clearTimeout(typingTimeout);
         }
 

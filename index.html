@@ -365,6 +365,15 @@
             font-weight: bold;
         }
 
+        .fade-in-text {
+            opacity: 0;
+            animation: fadeInAnim 400ms forwards ease-in-out;
+        }
+
+        @keyframes fadeInAnim {
+            to { opacity: 1; }
+        }
+
         .footer-date {
             display: block;
             margin-top: 22px;
@@ -398,7 +407,7 @@
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
-            transition: opacity 0.5s ease, background 0.2s;
+            transition: opacity 0.8s ease, background 0.2s, color 0.2s;
         }
         .close-overlay-btn.visible {
             opacity: 1;
@@ -622,6 +631,15 @@
             "Yêu chị nhiềuuu ❤️"
         ];
 
+        function lowerVolumeTemporarily() {
+            if (!music) return;
+            const originalVol = music.volume;
+            music.volume = Math.max(0, originalVol - 0.1); 
+            setTimeout(() => {
+                music.volume = originalVol;
+            }, 1000);
+        }
+
         function openSecretOverlay(event) {
             event.stopPropagation();
             const overlay = document.getElementById('secretOverlay');
@@ -643,6 +661,11 @@
                 if (phraseIndex < phrases.length) {
                     const currentPhrase = phrases[phraseIndex];
                     
+                    // Giảm nhạc khi bắt đầu gõ "Yêu chị nhiềuuu ❤️"
+                    if (phraseIndex === phrases.length - 1 && charIndex === 0) {
+                        lowerVolumeTemporarily();
+                    }
+
                     if (charIndex < currentPhrase.length) {
                         if (phraseIndex === phrases.length - 1) {
                             let hlSpan = target.querySelector('.highlight-text');
@@ -670,9 +693,12 @@
                         footerSpan.innerHTML = `
                         24.07.2011 ✦ 24.07.2026
                         <br>
-                        <span class="highlight-text">15th Birthday ❤️</span>
+                        <span class="highlight-text fade-in-text">15th Birthday ❤️</span>
                         `;
                         cursor.insertAdjacentElement('beforebegin', footerSpan);
+
+                        // Xóa con trỏ khi hoàn thành lá thư
+                        cursor.style.display = 'none';
 
                         typingTimeout = setTimeout(() => {
                             closeBtn.classList.add('visible');

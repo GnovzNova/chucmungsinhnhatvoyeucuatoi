@@ -34,23 +34,15 @@
             100% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* CONTAINER DÀNH RIÊNG CHO PHÁO HOA */
         #confetti-wrapper {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 99;
-            overflow: hidden;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 99; overflow: hidden;
         }
 
         .confetti {
-            position: absolute;
-            top: -20px;
-            animation: drop 2.5s linear forwards;
-            pointer-events: none;
+            position: absolute; top: -20px;
+            animation: drop 2.5s linear forwards; pointer-events: none;
         }
         @keyframes drop {
             0% { transform: translateY(0) rotate(0deg); opacity: 1; }
@@ -62,52 +54,29 @@
         
         .login-card {
             background: rgba(255, 255, 255, 0.95);
-            padding: 25px;
-            border: 4px solid #ff4d6d;
-            border-radius: 10px;
-            text-align: center;
-            width: 320px;
-            box-shadow: 6px 6px 0px #ff4d6d;
+            padding: 25px; border: 4px solid #ff4d6d; border-radius: 10px;
+            text-align: center; width: 320px; box-shadow: 6px 6px 0px #ff4d6d;
         }
         .login-card img { width: 220px; height: auto; margin-bottom: 20px; border-radius: 5px; }
         .login-card input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 2px solid #ff4d6d;
-            border-radius: 5px;
-            text-align: center;
-            font-size: 1rem;
-            color: #ff4d6d;
-            outline: none;
+            width: 100%; padding: 12px; margin-bottom: 15px;
+            border: 2px solid #ff4d6d; border-radius: 5px;
+            text-align: center; font-size: 1rem; color: #ff4d6d; outline: none;
         }
         .login-card input::placeholder { color: #ffbcca; }
         
         .btn {
-            background-color: #ff4d6d;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-weight: bold;
-            font-size: 1.4rem;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 5px #c92a42;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.1s ease;
+            background-color: #ff4d6d; color: white; border: none;
+            padding: 12px 30px; font-weight: bold; font-size: 1.4rem;
+            border-radius: 5px; cursor: pointer; box-shadow: 0 5px #c92a42;
+            text-transform: uppercase; letter-spacing: 1px; transition: all 0.1s ease;
         }
         .btn:active { box-shadow: 0 0 #c92a42; transform: translateY(5px); }
 
         .cake-text {
-            font-size: 2.2rem;
-            color: #fff;
-            font-weight: 900;
-            letter-spacing: 4px;
-            line-height: 1.5;
-            margin-bottom: 35px;
-            text-transform: uppercase;
-            text-align: center;
+            font-size: 2.2rem; color: #fff; font-weight: 900;
+            letter-spacing: 4px; line-height: 1.5; margin-bottom: 35px;
+            text-transform: uppercase; text-align: center;
             text-shadow: 0 0 10px #ff4d6d, 0 0 20px #ff4d6d;
         }
         .cake-container { position: relative; width: 200px; height: 200px; margin-bottom: 50px; }
@@ -133,287 +102,167 @@
         }
         @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 
-        /* Envelope & Folded Letter */
         .envelope-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-end;
-            height: 100vh;
-            padding-bottom: 80px;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: flex-end; height: 100vh; padding-bottom: 80px;
         }
 
         .envelope-wrapper {
-            position: relative; 
-            width: 440px; 
-            height: 280px; 
-            background-color: #ff758c; 
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            margin-bottom: 20px;
-            cursor: pointer;
+            position: relative; width: 440px; height: 280px;
+            background-color: #ff758c; border-radius: 0 0 10px 10px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4); margin-bottom: 20px; cursor: pointer;
         }
 
         .envelope-wrapper:before {
             content: ""; position: absolute; top: 0; left: 0;
             border-left: 220px solid transparent; border-right: 220px solid transparent;
-            border-top: 140px solid #ff758c; 
-            transform-origin: top;
-            transition: transform 0.4s ease-in-out; 
-            z-index: 5;
+            border-top: 140px solid #ff758c; transform-origin: top;
+            transition: transform 0.4s ease-in-out; z-index: 5;
         }
         .envelope-wrapper.open-lid:before { 
-            transform: rotateX(180deg); 
-            z-index: 1; 
-            border-top-color: #ff637f;
+            transform: rotateX(180deg); z-index: 1; border-top-color: #ff637f;
         }
         
         .envelope-wrapper:after {
             content: ""; position: absolute; bottom: 0; left: 0;
             border-left: 220px solid #ff5573; border-right: 220px solid #ff5573;
             border-bottom: 140px solid #ff4d6d; border-top: 140px solid transparent;
-            z-index: 4; border-radius: 0 0 10px 10px;
-            pointer-events: none;
+            z-index: 4; border-radius: 0 0 10px 10px; pointer-events: none;
         }
         
-        /* Lá thư dạng gập */
         .letter-card {
-            position: absolute; 
-            bottom: 15px; 
-            left: 20px; 
-            width: 400px; 
-            height: 250px;
-            z-index: 2;
-            perspective: 1000px;
+            position: absolute; bottom: 15px; left: 20px; width: 400px; height: 250px;
+            z-index: 2; perspective: 1000px;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.8s;
         }
 
-        /* Mặt bìa ngoài của thư gập */
         .letter-cover {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #fff0f3;
-            border: 2px dashed #ff4d6d;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            backface-visibility: hidden;
-            transition: transform 0.5s ease, opacity 0.5s ease;
-            z-index: 2;
-            cursor: pointer;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: #fff0f3; border: 2px dashed #ff4d6d; border-radius: 8px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15); backface-visibility: hidden;
+            transition: transform 0.5s ease, opacity 0.5s ease; z-index: 2; cursor: pointer;
         }
-        .letter-cover span {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #ff4d6d;
-            margin-top: 10px;
-        }
+        .letter-cover span { font-size: 1.2rem; font-weight: bold; color: #ff4d6d; margin-top: 10px; }
 
-        /* Content bên trong thư */
         .letter-content {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: white; 
-            border-radius: 8px; 
-            padding: 15px 20px; 
-            box-shadow: 0 0 15px rgba(0,0,0,0.15); 
-            font-size: 0.9rem; 
-            color: #444; 
-            line-height: 1.45;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            opacity: 0;
-            transform: scaleY(0.8);
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: white; border-radius: 8px; padding: 15px 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15); font-size: 0.9rem; color: #444; line-height: 1.45;
+            display: flex; flex-direction: column; justify-content: space-between;
+            opacity: 0; transform: scaleY(0.8);
             transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
-            overflow: hidden !important; 
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+            overflow: hidden !important; -ms-overflow-style: none; scrollbar-width: none;
         }
 
-        .letter-content::-webkit-scrollbar {
-            display: none !important;
-            width: 0 !important;
-            height: 0 !important;
-        }
-
-        .envelope-wrapper.open-letter .letter-card { 
-            transform: translateY(-130px); 
-            z-index: 6; 
-        }
-
-        .envelope-wrapper.unfold-letter .letter-card {
-            height: 250px;
-            transform: translateY(-130px);
-        }
-        .envelope-wrapper.unfold-letter .letter-cover {
-            opacity: 0;
-            pointer-events: none;
-            transform: rotateX(-90deg);
-        }
-        .envelope-wrapper.unfold-letter .letter-content {
-            opacity: 1;
-            transform: scaleY(1);
-            height: 100%;
-        }
+        .envelope-wrapper.open-letter .letter-card { transform: translateY(-130px); z-index: 6; }
+        .envelope-wrapper.unfold-letter .letter-card { height: 250px; transform: translateY(-130px); }
+        .envelope-wrapper.unfold-letter .letter-cover { opacity: 0; pointer-events: none; transform: rotateX(-90deg); }
+        .envelope-wrapper.unfold-letter .letter-content { opacity: 1; transform: scaleY(1); height: 100%; }
 
         .letter-content h2 { color: #ff4d6d; font-size: 1.1rem; text-align: center; margin-bottom: 6px; }
         .letter-text p { margin-bottom: 6px; text-indent: 10px; text-align: justify; }
 
-        /* Tim to & Bay nhanh trong 2s */
+        .secret-trigger-text {
+            text-align: right; font-weight: bold; cursor: pointer; user-select: none;
+        }
+
         .floating-heart {
-            position: absolute;
-            font-size: var(--size);
-            pointer-events: none;
-            z-index: 10;
-            user-select: none;
-            animation: floatUpFast var(--duration) ease-out forwards;
+            position: absolute; font-size: var(--size); pointer-events: none; z-index: 10;
+            user-select: none; animation: floatUpFast var(--duration) ease-out forwards;
             filter: drop-shadow(0 4px 8px rgba(255, 77, 109, 0.5));
         }
 
         @keyframes floatUpFast {
-            0% {
-                opacity: 0;
-                transform: translateY(0) scale(0.5) rotate(0deg);
-            }
-            20% { opacity: 1; }
-            80% { opacity: 0.9; }
-            100% {
-                opacity: 0;
-                transform: translateY(calc(var(--fly-dist) * -1)) scale(1.1) rotate(var(--sway));
-            }
+            0% { opacity: 0; transform: translateY(0) scale(0.5) rotate(0deg); }
+            20% { opacity: 1; } 80% { opacity: 0.9; }
+            100% { opacity: 0; transform: translateY(calc(var(--fly-dist) * -1)) scale(1.1) rotate(var(--sway)); }
         }
 
         .secret-corner-btn {
-            display: block;
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #ff4d6d;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-weight: bold;
-            font-size: 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.4);
-            z-index: 10;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease, transform 0.3s ease;
+            display: block; position: fixed; bottom: 30px; right: 30px;
+            background-color: #ff4d6d; color: white; border: none; padding: 12px 20px;
+            font-weight: bold; font-size: 1rem; border-radius: 20px; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.4); z-index: 10;
+            opacity: 0; pointer-events: none; transition: opacity 0.5s ease, transform 0.3s ease;
         }
-        .secret-corner-btn.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .secret-corner-btn:hover {
-            transform: scale(1.05);
-            background-color: #c92a42;
-        }
+        .secret-corner-btn.visible { opacity: 1; pointer-events: auto; }
+        .secret-corner-btn:hover { transform: scale(1.05); background-color: #c92a42; }
 
         .overlay-blur {
-            display: flex;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(9, 10, 15, 0.88);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            z-index: 20;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 1s ease;
+            display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(9, 10, 15, 0.88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            z-index: 20; justify-content: center; align-items: center; flex-direction: column;
+            padding: 20px; opacity: 0; pointer-events: none; transition: opacity 1s ease;
         }
-        .overlay-blur.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .overlay-blur.active { opacity: 1; pointer-events: auto; }
 
-        .typewriter-box {
-            max-width: 600px;
-            width: 90%;
-            color: #ffbcca;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            text-align: left;
-        }
-        
-        .secret-title {
-            color: #ff4d6d;
-            font-size: 1.6rem;
-            font-weight: 800;
-            margin-bottom: 25px;
-            text-align: center;
-            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
-        }
-
-        .typewriter-content {
-            min-height: 150px;
-            white-space: pre-wrap;
-        }
-        
-        .highlight-text {
-            color: #ff4d6d;
-            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
-            font-weight: bold;
-        }
-
-        .fade-in-text {
-            opacity: 0;
-            animation: fadeInAnim 400ms forwards ease-in-out;
-        }
-
-        @keyframes fadeInAnim {
-            to { opacity: 1; }
-        }
+        .typewriter-box { max-width: 600px; width: 90%; color: #ffbcca; font-size: 1.2rem; line-height: 1.8; text-align: left; }
+        .secret-title { color: #ff4d6d; font-size: 1.6rem; font-weight: 800; margin-bottom: 25px; text-align: center; text-shadow: 0 0 10px rgba(255, 77, 109, 0.5); }
+        .typewriter-content { min-height: 150px; white-space: pre-wrap; }
+        .highlight-text { color: #ff4d6d; text-shadow: 0 0 10px rgba(255, 77, 109, 0.5); font-weight: bold; }
+        .fade-in-text { opacity: 0; animation: fadeInAnim 400ms forwards ease-in-out; }
+        @keyframes fadeInAnim { to { opacity: 1; } }
 
         .footer-date {
-            display: block;
-            margin-top: 22px;
-            text-align: center;
-            font-size: 0.9rem;
-            line-height: 1.7;
-            color: #ffffffcc;
-            letter-spacing: 1px;
-            opacity: .75;
+            display: block; margin-top: 22px; text-align: center; font-size: 0.9rem;
+            line-height: 1.7; color: #ffffffcc; letter-spacing: 1px; opacity: .75;
         }
 
         .cursor {
-            display: inline-block;
-            width: 2px;
-            height: 20px;
-            background-color: #ff4d6d;
-            margin-left: 3px;
-            animation: blink 0.6s infinite;
-            vertical-align: middle;
+            display: inline-block; width: 2px; height: 20px; background-color: #ff4d6d;
+            margin-left: 3px; animation: blink 0.6s infinite; vertical-align: middle;
         }
         @keyframes blink { 50% { opacity: 0; } }
 
         .close-overlay-btn {
-            opacity: 0;
-            pointer-events: none;
-            margin-top: 40px;
-            background: transparent;
-            border: 2px solid #ff4d6d;
-            color: #ff4d6d;
-            padding: 10px 25px;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: opacity 0.8s ease, background 0.2s, color 0.2s;
+            opacity: 0; pointer-events: none; margin-top: 40px; background: transparent;
+            border: 2px solid #ff4d6d; color: #ff4d6d; padding: 10px 25px; font-weight: bold;
+            border-radius: 5px; cursor: pointer; transition: opacity 0.8s ease, background 0.2s, color 0.2s;
         }
-        .close-overlay-btn.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .close-overlay-btn.visible { opacity: 1; pointer-events: auto; }
         .close-overlay-btn:hover { background: #ff4d6d; color: white; }
+
+        /* HIDDEN SECRET OVERLAY STYLES */
+        #hiddenSecretOverlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #000; z-index: 999; display: none; opacity: 0;
+            transition: opacity 5s ease, background 3s ease;
+            color: #fff; font-family: 'Courier New', Courier, monospace;
+            justify-content: center; align-items: center; text-align: center;
+        }
+        #hiddenSecretOverlay.active { display: flex; }
+
+        .secret-scene {
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 1s ease, transform 0.8s ease; width: 80%; max-width: 650px;
+        }
+        .secret-scene.show { display: flex; opacity: 1; }
+        .secret-scene.slide-out { transform: translateX(-100vw); opacity: 0; }
+
+        .next-arrow-btn {
+            position: fixed; bottom: 30px; right: 40px; font-size: 2rem; color: #ff4d6d;
+            cursor: pointer; display: none; opacity: 0; transition: opacity 0.5s ease; user-select: none;
+        }
+        .next-arrow-btn.visible { display: block; opacity: 1; }
+
+        .scene-continue-btn {
+            margin-top: 25px; background: transparent; border: 1px solid #ff4d6d; color: #ff4d6d;
+            padding: 8px 20px; border-radius: 4px; cursor: pointer; font-family: inherit;
+            opacity: 0; transition: opacity 0.5s ease;
+        }
+        .scene-continue-btn.visible { opacity: 1; }
+
+        .credits-box {
+            height: 300px; overflow: hidden; position: relative; width: 100%;
+        }
+        .credits-content {
+            position: absolute; width: 100%; bottom: -100%;
+            animation: scrollCredits 8s linear forwards;
+        }
+        @keyframes scrollCredits {
+            0% { bottom: -100%; } 100% { bottom: 100%; }
+        }
 
         .controls { display: flex; gap: 15px; }
     </style>
@@ -445,21 +294,19 @@
         <div class="envelope-container">
             <div class="envelope-wrapper" id="envelope">
                 <div class="letter-card" id="letterCard">
-                    <!-- Bìa thư gập kín -->
                     <div class="letter-cover" id="letterCover">
                         <span style="font-size: 2.5rem;">✉️</span>
                         <span>Dear My Baby ❤️</span>
                         <p style="font-size: 0.8rem; color: #888; margin-top: 5px;">(Bấm để mở thư đọc nè)</p>
                     </div>
 
-                    <!-- Nội dung thư bên trong -->
                     <div class="letter-content">
                         <h2>Happy Birthday, cô gái của emmm ❤️</h2>
                         <div class="letter-text">
                             <p>Chúc chị yêu của em tuổi mới luôn khỏe mạnh, luôn cười thật nhiều và gặp thật nhiều may mắn.</p>
                             <p>Mong tuổi mới sẽ mang đến cho chị thật nhiều điều tốt đẹp, ít áp lực hơn, nhiều tiếng cười hơn và luôn có những người yêu thương chị ở bên.</p>
                         </div>
-                        <p style="text-align: right; font-weight: bold;">Yêu chị. ❤️</p>
+                        <p class="secret-trigger-text" id="secretTrigger">Yêu chị. ❤️</p>
                     </div>
                 </div>
             </div>
@@ -479,6 +326,83 @@
         <button class="close-overlay-btn" id="closeOverlayBtn" onclick="closeSecretOverlay()">Đóng lại ❤️</button>
     </div>
 
+    <!-- HIDDEN SECRET OVERLAY -->
+    <div id="hiddenSecretOverlay">
+        <!-- Scene 1 -->
+        <div class="secret-scene" id="hScene1">
+            <h2 style="font-size: 1.8rem; color: #ff4d6d; margin-bottom: 15px;">07.06.2026</h2>
+            <p style="font-size: 1.1rem; color: #ccc;">The best choice I've ever made.</p>
+        </div>
+
+        <!-- Scene 2 -->
+        <div class="secret-scene" id="hScene2">
+            <p style="margin-bottom: 15px;">Loading hidden memories<span id="dotsAnim">.</span></p>
+            <div id="progressBar1" style="font-size: 0.9rem; color: #ff758c;">░░░░░░░░░░░░░░░░░░ 0%</div>
+        </div>
+
+        <!-- Scene 3 -->
+        <div class="secret-scene" id="hScene3">
+            <p style="color: #ff4d6d; font-weight: bold; margin-bottom: 10px;">Project:</p>
+            <p style="margin-bottom: 20px;">Make her smile.</p>
+            <p style="font-size: 0.9rem; margin-bottom: 5px;">Progress...</p>
+            <div id="progressBar2" style="font-size: 0.9rem; color: #ff758c;">░░░░░░░░░░░░░░░░░░ 0%</div>
+        </div>
+
+        <!-- Scene 4 -->
+        <div class="secret-scene" id="hScene4">
+            <p style="color: #ff4d6d; font-weight: bold; margin-bottom: 15px;">Project</p>
+            <p>Found: 1 person</p>
+            <p style="margin: 8px 0;">Status: Loved</p>
+            <p>Errors: 0</p>
+            <p style="margin-top: 15px; color: #ffbcca;">Estimated completion: Lifetime.</p>
+        </div>
+
+        <!-- Scene 5 -->
+        <div class="secret-scene" id="hScene5">
+            <p>Days knowing you: <span style="color: #ff4d6d;">400+</span></p>
+            <p style="margin: 10px 0;">Messages: <span style="color: #ff4d6d;">???</span></p>
+            <p>Times I smiled because of you: <span style="color: #ff4d6d;">Too many</span></p>
+            <p style="margin-top: 10px;">Times I regretted meeting you: <span style="color: #ff4d6d;">0</span></p>
+            <button class="scene-continue-btn" id="scene5ContinueBtn" onclick="goToScene6()">Continue</button>
+        </div>
+
+        <!-- Scene 6 -->
+        <div class="secret-scene" id="hScene6" style="width: 100%;">
+            <div class="credits-box">
+                <div class="credits-content">
+                    <p style="color: #ff4d6d; font-size: 0.8rem;">Director</p>
+                    <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 25px;">Hoàng Xuân Vượng</p>
+                    
+                    <p style="color: #ff4d6d; font-size: 0.8rem;">Main Character</p>
+                    <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 25px;">Nguyễn Anh Thư ❤️</p>
+                    
+                    <p style="color: #ff4d6d; font-size: 0.8rem;">Music</p>
+                    <p style="font-size: 1rem; margin-bottom: 25px;">iu_la_day.mp3</p>
+                    
+                    <p style="color: #ff4d6d; font-size: 0.8rem;">Special Thanks</p>
+                    <p style="font-size: 0.95rem;">Cảm ơn rất nhiều.</p>
+                    <p style="font-size: 0.95rem; margin-top: 5px;">Vì đã xuất hiện.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 7 -->
+        <div class="secret-scene" id="hScene7">
+            <p style="font-size: 1.3rem;">End?</p>
+            <p style="font-size: 1.3rem; margin: 10px 0;">No.</p>
+            <p style="font-size: 1.3rem; color: #ff4d6d;" id="continueSlideText">Continue...</p>
+        </div>
+
+        <!-- Scene 8 -->
+        <div class="secret-scene" id="hScene8">
+            <h2 style="font-size: 1.6rem; color: #ffcd3c; margin-bottom: 15px;">🏆 Achievement Unlocked</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 8px;">You found my secret.</p>
+            <p style="font-size: 1.2rem; color: #ff4d6d; font-weight: bold;">It's loving you.</p>
+        </div>
+
+        <div class="next-arrow-btn" id="nextArrowBtn" onclick="goToScene5()">▶</div>
+    </div>
+
     <audio id="bgMusic" loop>
         <source src="iu_la_day.mp3" type="audio/mpeg">
     </audio>
@@ -492,6 +416,10 @@
         let typingTimeout = null;
         let buttonTimer = null;
         let isOpening = false;
+
+        let secretViewed = false;
+        let triggerClickCount = 0;
+        let triggerTimer = null;
 
         function generateStars() {
             const container = document.getElementById('starsContainer');
@@ -661,7 +589,6 @@
                 if (phraseIndex < phrases.length) {
                     const currentPhrase = phrases[phraseIndex];
                     
-                    // Giảm nhạc khi bắt đầu gõ "Yêu chị nhiềuuu ❤️"
                     if (phraseIndex === phrases.length - 1 && charIndex === 0) {
                         lowerVolumeTemporarily();
                     }
@@ -696,8 +623,6 @@
                         <span class="highlight-text fade-in-text">15th Birthday ❤️</span>
                         `;
                         cursor.insertAdjacentElement('beforebegin', footerSpan);
-
-                        // Xóa con trỏ khi hoàn thành lá thư
                         cursor.style.display = 'none';
 
                         typingTimeout = setTimeout(() => {
@@ -717,6 +642,207 @@
                 document.getElementById('typewriterTarget').innerHTML = '';
             }, 1000);
             if(typingTimeout) clearTimeout(typingTimeout);
+
+            secretViewed = true;
+        }
+
+        document.getElementById('secretTrigger').addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (!secretViewed) return;
+
+            triggerClickCount++;
+
+            if (triggerTimer) clearTimeout(triggerTimer);
+
+            if (triggerClickCount === 3) {
+                triggerClickCount = 0;
+                startHiddenSecretFlow();
+            } else {
+                triggerTimer = setTimeout(() => {
+                    triggerClickCount = 0;
+                }, 2000);
+            }
+        });
+
+        function startHiddenSecretFlow() {
+            const hOverlay = document.getElementById('hiddenSecretOverlay');
+            hOverlay.classList.add('active');
+
+            setTimeout(() => {
+                hOverlay.style.opacity = '1';
+            }, 50);
+
+            setTimeout(() => {
+                runScene1();
+            }, 5000);
+        }
+
+        function runScene1() {
+            const s1 = document.getElementById('hScene1');
+            s1.classList.add('show');
+
+            setTimeout(() => {
+                s1.classList.remove('show');
+                setTimeout(runScene2, 1000);
+            }, 3000);
+        }
+
+        // SCENE 2: Progress 0% -> 100% trong 10s (chạy nhịp tự nhiên non-linear)
+        function runScene2() {
+            const s2 = document.getElementById('hScene2');
+            s2.classList.add('show');
+
+            let dotState = 1;
+            const dotsAnim = document.getElementById('dotsAnim');
+            const dotInterval = setInterval(() => {
+                dotState = (dotState % 3) + 1;
+                dotsAnim.innerText = '.'.repeat(dotState);
+            }, 1000);
+
+            let percent = 0;
+            const bar1 = document.getElementById('progressBar1');
+            const startTime = Date.now();
+            const totalDuration = 10000; // 10 giây
+
+            const progressInterval = setInterval(() => {
+                const elapsed = Date.now() - startTime;
+                if (elapsed >= totalDuration) {
+                    percent = 100;
+                    clearInterval(progressInterval);
+                    clearInterval(dotInterval);
+                    
+                    const filled = 10;
+                    bar1.innerText = '█'.repeat(filled) + ' 100%';
+
+                    setTimeout(() => {
+                        s2.classList.remove('show');
+                        setTimeout(runScene3, 1000);
+                    }, 500);
+                } else {
+                    // Biến thiên tự nhiên
+                    const progressRatio = elapsed / totalDuration;
+                    const randomVariation = (Math.random() - 0.5) * 0.08;
+                    let targetPercent = Math.floor((progressRatio + randomVariation) * 100);
+                    
+                    if (targetPercent < percent) targetPercent = percent; 
+                    if (targetPercent > 99) targetPercent = 99;
+                    percent = targetPercent;
+
+                    const filled = Math.floor(percent / 10);
+                    const empty = 10 - filled;
+                    bar1.innerText = '█'.repeat(filled) + '░'.repeat(empty) + ` ${percent}%`;
+                }
+            }, 300);
+        }
+
+        // SCENE 3: Progress 0% -> 100% trong 10s
+        function runScene3() {
+            const s3 = document.getElementById('hScene3');
+            s3.classList.add('show');
+
+            let percent = 0;
+            const bar2 = document.getElementById('progressBar2');
+            const startTime = Date.now();
+            const totalDuration = 10000;
+
+            const progressInterval = setInterval(() => {
+                const elapsed = Date.now() - startTime;
+                if (elapsed >= totalDuration) {
+                    percent = 100;
+                    clearInterval(progressInterval);
+                    
+                    const filled = 10;
+                    bar2.innerText = '█'.repeat(filled) + ' 100%';
+
+                    setTimeout(() => {
+                        s3.classList.remove('show');
+                        setTimeout(runScene4, 1000);
+                    }, 500);
+                } else {
+                    const progressRatio = elapsed / totalDuration;
+                    const randomVariation = (Math.random() - 0.5) * 0.06;
+                    let targetPercent = Math.floor((progressRatio + randomVariation) * 100);
+                    
+                    if (targetPercent < percent) targetPercent = percent;
+                    if (targetPercent > 99) targetPercent = 99;
+                    percent = targetPercent;
+
+                    const filled = Math.floor(percent / 10);
+                    const empty = 10 - filled;
+                    bar2.innerText = '█'.repeat(filled) + '░'.repeat(empty) + ` ${percent}%`;
+                }
+            }, 300);
+        }
+
+        function runScene4() {
+            const s4 = document.getElementById('hScene4');
+            s4.classList.add('show');
+
+            setTimeout(() => {
+                document.getElementById('nextArrowBtn').classList.add('visible');
+            }, 2000);
+        }
+
+        function goToScene5() {
+            document.getElementById('nextArrowBtn').classList.remove('visible');
+            const s4 = document.getElementById('hScene4');
+            s4.classList.add('slide-out');
+
+            setTimeout(() => {
+                s4.classList.remove('show', 'slide-out');
+                const s5 = document.getElementById('hScene5');
+                s5.classList.add('show');
+
+                setTimeout(() => {
+                    document.getElementById('scene5ContinueBtn').classList.add('visible');
+                }, 5000);
+            }, 800);
+        }
+
+        function goToScene6() {
+            const s5 = document.getElementById('hScene5');
+            s5.classList.remove('show');
+
+            setTimeout(() => {
+                const s6 = document.getElementById('hScene6');
+                s6.classList.add('show');
+
+                setTimeout(() => {
+                    s6.classList.remove('show');
+                    setTimeout(runScene7, 1000);
+                }, 8000);
+            }, 800);
+        }
+
+        function runScene7() {
+            const s7 = document.getElementById('hScene7');
+            s7.classList.add('show');
+
+            setTimeout(() => {
+                const hOverlay = document.getElementById('hiddenSecretOverlay');
+                hOverlay.style.background = 'radial-gradient(circle, #ffeaa7 0%, #000 70%)';
+
+                setTimeout(() => {
+                    s7.classList.remove('show');
+                    setTimeout(runScene8, 1000);
+                }, 2000);
+            }, 3000);
+        }
+
+        function runScene8() {
+            const s8 = document.getElementById('hScene8');
+            s8.classList.add('show');
+
+            setTimeout(() => {
+                const hOverlay = document.getElementById('hiddenSecretOverlay');
+                hOverlay.style.opacity = '0';
+
+                setTimeout(() => {
+                    hOverlay.classList.remove('active');
+                    hOverlay.style.background = '#000';
+                    s8.classList.remove('show');
+                }, 2000);
+            }, 5000);
         }
 
         function createConfetti() {

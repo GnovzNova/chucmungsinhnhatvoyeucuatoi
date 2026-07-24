@@ -80,16 +80,19 @@
             text-shadow: 0 0 10px #ff4d6d, 0 0 20px #ff4d6d;
         }
         .cake-container { position: relative; width: 200px; height: 200px; margin-bottom: 50px; }
+        
+        /* BÁNH KEM VỊ VANI (Tone màu kem bơ vani ngọt ngào) */
         .cake {
             position: absolute; bottom: 0; width: 200px; height: 100px;
-            background: #ff758c; border-radius: 60px / 30px;
-            box-shadow: 0 10px #ff4d6d, inset 0 5px rgba(255,255,255,0.4);
+            background: #ffe0b2; border-radius: 60px / 30px;
+            box-shadow: 0 10px #ffd54f, inset 0 5px rgba(255,255,255,0.8);
         }
         .cake:before {
             content: ""; position: absolute; top: -15px; width: 200px; height: 50px;
-            background: #fff; border-radius: 60px / 25px;
-            box-shadow: inset 0 -5px #eee, 0 5px #ff758c;
+            background: #fff3e0; border-radius: 60px / 25px;
+            box-shadow: inset 0 -5px #ffe0b2, 0 5px #ffd54f;
         }
+        
         .candle {
             position: absolute; bottom: 90px; left: 93px; width: 14px; height: 50px;
             background: linear-gradient(#ffcd3c, #ff9f43); border-radius: 3px;
@@ -168,7 +171,6 @@
             transition: all 0.5s ease; color: #333;
         }
         
-        /* Hiệu ứng sáng rực cho chữ Yêu chị ❤️ sau khi đọc bí mật */
         .secret-trigger-text.glowing {
             color: #ff4d6d !important;
             font-size: 1.05rem;
@@ -236,7 +238,6 @@
         .close-overlay-btn.visible { opacity: 1; pointer-events: auto; }
         .close-overlay-btn:hover { background: #ff4d6d; color: white; }
 
-        /* ================= HIDDEN SECRET OVERLAY STYLES ================= */
         #hiddenSecretOverlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background-color: #000000; z-index: 999; display: none; opacity: 0;
@@ -444,7 +445,7 @@
             <div class="center-fade-text" id="fadeText3" style="color: #ff4d6d;">Continue...</div>
         </div>
 
-        <!-- Scene 8: Thành Tựu (Đã bọc Outline + Nổi bật trên nền vàng kim) -->
+        <!-- Scene 8 -->
         <div class="secret-scene" id="hScene8">
             <h2 style="font-size: 1.9rem; color: #ff3366; margin-bottom: 15px; font-weight: 900; text-shadow: 0px 0px 10px rgba(255, 255, 255, 1), 2px 2px 0px #000;">🏆 Achievement Unlocked</h2>
             <p style="font-size: 1.3rem; margin-bottom: 12px; color: #111111; font-weight: 800; -webkit-text-stroke: 0.5px #fff; text-shadow: 0 0 8px rgba(255,255,255,0.9);">You found my secret.</p>
@@ -696,7 +697,6 @@
 
             secretViewed = true;
 
-            // Làm chữ "Yêu chị ❤️" trong lá thư sáng rực lên!
             const secretTrigger = document.getElementById('secretTrigger');
             if (secretTrigger) {
                 secretTrigger.classList.add('glowing');
@@ -721,7 +721,6 @@
             }
         });
 
-        // ================= HIDDEN SECRET FLOW =================
         function startHiddenSecretFlow() {
             const hOverlay = document.getElementById('hiddenSecretOverlay');
             hOverlay.classList.add('active');
